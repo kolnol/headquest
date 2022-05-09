@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A52829B85000B76F9E /* HeadQuestApp.swift */; };
+		68C757A82829B85000B76F9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A72829B85000B76F9E /* ContentView.swift */; };
+		68C757AA2829B85200B76F9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C757A92829B85200B76F9E /* Assets.xcassets */; };
+		68C757AD2829B85200B76F9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C757AC2829B85200B76F9E /* Preview Assets.xcassets */; };
+		68C757B72829B85300B76F9E /* HeadQuestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757B62829B85300B76F9E /* HeadQuestTests.swift */; };
+		68C757C12829B85300B76F9E /* HeadQuestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757C02829B85300B76F9E /* HeadQuestUITests.swift */; };
+		68C757C32829B85300B76F9E /* HeadQuestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757C22829B85300B76F9E /* HeadQuestUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		68C757B32829B85300B76F9E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68C7579A2829B85000B76F9E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68C757A12829B85000B76F9E;
+			remoteInfo = HeadQuest;
+		};
+		68C757BD2829B85300B76F9E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68C7579A2829B85000B76F9E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68C757A12829B85000B76F9E;
+			remoteInfo = HeadQuest;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		68C757A22829B85000B76F9E /* HeadQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeadQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		68C757A52829B85000B76F9E /* HeadQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestApp.swift; sourceTree = "<group>"; };
+		68C757A72829B85000B76F9E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		68C757A92829B85200B76F9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		68C757AC2829B85200B76F9E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		68C757B22829B85300B76F9E /* HeadQuestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeadQuestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		68C757B62829B85300B76F9E /* HeadQuestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestTests.swift; sourceTree = "<group>"; };
+		68C757BC2829B85300B76F9E /* HeadQuestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeadQuestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		68C757C02829B85300B76F9E /* HeadQuestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestUITests.swift; sourceTree = "<group>"; };
+		68C757C22829B85300B76F9E /* HeadQuestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		68C7579F2829B85000B76F9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C757AF2829B85300B76F9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C757B92829B85300B76F9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		68C757992829B85000B76F9E = {
+			isa = PBXGroup;
+			children = (
+				68C757A42829B85000B76F9E /* HeadQuest */,
+				68C757B52829B85300B76F9E /* HeadQuestTests */,
+				68C757BF2829B85300B76F9E /* HeadQuestUITests */,
+				68C757A32829B85000B76F9E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		68C757A32829B85000B76F9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68C757A22829B85000B76F9E /* HeadQuest.app */,
+				68C757B22829B85300B76F9E /* HeadQuestTests.xctest */,
+				68C757BC2829B85300B76F9E /* HeadQuestUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		68C757A42829B85000B76F9E /* HeadQuest */ = {
+			isa = PBXGroup;
+			children = (
+				68C757A52829B85000B76F9E /* HeadQuestApp.swift */,
+				68C757A72829B85000B76F9E /* ContentView.swift */,
+				68C757A92829B85200B76F9E /* Assets.xcassets */,
+				68C757AB2829B85200B76F9E /* Preview Content */,
+			);
+			path = HeadQuest;
+			sourceTree = "<group>";
+		};
+		68C757AB2829B85200B76F9E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				68C757AC2829B85200B76F9E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		68C757B52829B85300B76F9E /* HeadQuestTests */ = {
+			isa = PBXGroup;
+			children = (
+				68C757B62829B85300B76F9E /* HeadQuestTests.swift */,
+			);
+			path = HeadQuestTests;
+			sourceTree = "<group>";
+		};
+		68C757BF2829B85300B76F9E /* HeadQuestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				68C757C02829B85300B76F9E /* HeadQuestUITests.swift */,
+				68C757C22829B85300B76F9E /* HeadQuestUITestsLaunchTests.swift */,
+			);
+			path = HeadQuestUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		68C757A12829B85000B76F9E /* HeadQuest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68C757C62829B85300B76F9E /* Build configuration list for PBXNativeTarget "HeadQuest" */;
+			buildPhases = (
+				68C7579E2829B85000B76F9E /* Sources */,
+				68C7579F2829B85000B76F9E /* Frameworks */,
+				68C757A02829B85000B76F9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HeadQuest;
+			productName = HeadQuest;
+			productReference = 68C757A22829B85000B76F9E /* HeadQuest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		68C757B12829B85300B76F9E /* HeadQuestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68C757C92829B85300B76F9E /* Build configuration list for PBXNativeTarget "HeadQuestTests" */;
+			buildPhases = (
+				68C757AE2829B85300B76F9E /* Sources */,
+				68C757AF2829B85300B76F9E /* Frameworks */,
+				68C757B02829B85300B76F9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68C757B42829B85300B76F9E /* PBXTargetDependency */,
+			);
+			name = HeadQuestTests;
+			productName = HeadQuestTests;
+			productReference = 68C757B22829B85300B76F9E /* HeadQuestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		68C757BB2829B85300B76F9E /* HeadQuestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68C757CC2829B85300B76F9E /* Build configuration list for PBXNativeTarget "HeadQuestUITests" */;
+			buildPhases = (
+				68C757B82829B85300B76F9E /* Sources */,
+				68C757B92829B85300B76F9E /* Frameworks */,
+				68C757BA2829B85300B76F9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68C757BE2829B85300B76F9E /* PBXTargetDependency */,
+			);
+			name = HeadQuestUITests;
+			productName = HeadQuestUITests;
+			productReference = 68C757BC2829B85300B76F9E /* HeadQuestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		68C7579A2829B85000B76F9E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					68C757A12829B85000B76F9E = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					68C757B12829B85300B76F9E = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 68C757A12829B85000B76F9E;
+					};
+					68C757BB2829B85300B76F9E = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 68C757A12829B85000B76F9E;
+					};
+				};
+			};
+			buildConfigurationList = 68C7579D2829B85000B76F9E /* Build configuration list for PBXProject "HeadQuest" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 68C757992829B85000B76F9E;
+			productRefGroup = 68C757A32829B85000B76F9E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				68C757A12829B85000B76F9E /* HeadQuest */,
+				68C757B12829B85300B76F9E /* HeadQuestTests */,
+				68C757BB2829B85300B76F9E /* HeadQuestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		68C757A02829B85000B76F9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C757AD2829B85200B76F9E /* Preview Assets.xcassets in Resources */,
+				68C757AA2829B85200B76F9E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C757B02829B85300B76F9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C757BA2829B85300B76F9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		68C7579E2829B85000B76F9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C757A82829B85000B76F9E /* ContentView.swift in Sources */,
+				68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C757AE2829B85300B76F9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C757B72829B85300B76F9E /* HeadQuestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C757B82829B85300B76F9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C757C12829B85300B76F9E /* HeadQuestUITests.swift in Sources */,
+				68C757C32829B85300B76F9E /* HeadQuestUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		68C757B42829B85300B76F9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68C757A12829B85000B76F9E /* HeadQuest */;
+			targetProxy = 68C757B32829B85300B76F9E /* PBXContainerItemProxy */;
+		};
+		68C757BE2829B85300B76F9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68C757A12829B85000B76F9E /* HeadQuest */;
+			targetProxy = 68C757BD2829B85300B76F9E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		68C757C42829B85300B76F9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		68C757C52829B85300B76F9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		68C757C72829B85300B76F9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HeadQuest/Preview Content\"";
+				DEVELOPMENT_TEAM = R5QQN58SRF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mykola.odnoshyvkin.HeadQuest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		68C757C82829B85300B76F9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HeadQuest/Preview Content\"";
+				DEVELOPMENT_TEAM = R5QQN58SRF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mykola.odnoshyvkin.HeadQuest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		68C757CA2829B85300B76F9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R5QQN58SRF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mykola.odnoshyvkin.HeadQuestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HeadQuest.app/HeadQuest";
+			};
+			name = Debug;
+		};
+		68C757CB2829B85300B76F9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R5QQN58SRF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mykola.odnoshyvkin.HeadQuestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HeadQuest.app/HeadQuest";
+			};
+			name = Release;
+		};
+		68C757CD2829B85300B76F9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R5QQN58SRF;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mykola.odnoshyvkin.HeadQuestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HeadQuest;
+			};
+			name = Debug;
+		};
+		68C757CE2829B85300B76F9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R5QQN58SRF;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mykola.odnoshyvkin.HeadQuestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HeadQuest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		68C7579D2829B85000B76F9E /* Build configuration list for PBXProject "HeadQuest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C757C42829B85300B76F9E /* Debug */,
+				68C757C52829B85300B76F9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68C757C62829B85300B76F9E /* Build configuration list for PBXNativeTarget "HeadQuest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C757C72829B85300B76F9E /* Debug */,
+				68C757C82829B85300B76F9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68C757C92829B85300B76F9E /* Build configuration list for PBXNativeTarget "HeadQuestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C757CA2829B85300B76F9E /* Debug */,
+				68C757CB2829B85300B76F9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68C757CC2829B85300B76F9E /* Build configuration list for PBXNativeTarget "HeadQuestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C757CD2829B85300B76F9E /* Debug */,
+				68C757CE2829B85300B76F9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 68C7579A2829B85000B76F9E /* Project object */;
+}
