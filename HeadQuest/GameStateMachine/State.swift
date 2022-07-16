@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol State {
+    var questText: String {get}
+    func invoke() -> Void
+}

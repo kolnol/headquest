@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import SwiftGraph
+
+protocol QuestGraph {
+    func traverse(questNode:QuestGraphNode, action:QuestGraphActionEdge) -> QuestGraphNode
+}

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol QuestGraphNode {
+    var name:String{get}
+    var description:String{get}
+    var isEnd:Bool{get}
+}

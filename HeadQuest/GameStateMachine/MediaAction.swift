@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol MediaAction {
+    var name: String {get}
+}

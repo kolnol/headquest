@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol GameStateMachine {
+    var currState :State {get}
+    func reactToAction(action:MediaAction) -> State
+    func reset() -> State
+}
