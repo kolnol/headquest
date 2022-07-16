@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68A25B7F2882FBC200884BB1 /* QuestGraphFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B7E2882FBC200884BB1 /* QuestGraphFixtures.swift */; };
+		68A25B842882FBEA00884BB1 /* GameStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B812882FBEA00884BB1 /* GameStateMachine.swift */; };
+		68A25B852882FBEA00884BB1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B822882FBEA00884BB1 /* State.swift */; };
+		68A25B862882FBEA00884BB1 /* MediaAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B832882FBEA00884BB1 /* MediaAction.swift */; };
+		68A25B8F2882FBF300884BB1 /* QuestGraphNodeSG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B892882FBF300884BB1 /* QuestGraphNodeSG.swift */; };
+		68A25B902882FBF300884BB1 /* QuestGraphSG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8A2882FBF300884BB1 /* QuestGraphSG.swift */; };
+		68A25B912882FBF300884BB1 /* QuestGraphActionEdgeSG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8B2882FBF300884BB1 /* QuestGraphActionEdgeSG.swift */; };
+		68A25B922882FBF300884BB1 /* QuestGraphNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8C2882FBF300884BB1 /* QuestGraphNode.swift */; };
+		68A25B932882FBF300884BB1 /* QuestGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8D2882FBF300884BB1 /* QuestGraph.swift */; };
+		68A25B942882FBF300884BB1 /* QuestGraphActionEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8E2882FBF300884BB1 /* QuestGraphActionEdge.swift */; };
 		68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A52829B85000B76F9E /* HeadQuestApp.swift */; };
 		68C757A82829B85000B76F9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A72829B85000B76F9E /* ContentView.swift */; };
 		68C757AA2829B85200B76F9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C757A92829B85200B76F9E /* Assets.xcassets */; };
@@ -34,6 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		68A25B7E2882FBC200884BB1 /* QuestGraphFixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphFixtures.swift; sourceTree = "<group>"; };
+		68A25B812882FBEA00884BB1 /* GameStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStateMachine.swift; sourceTree = "<group>"; };
+		68A25B822882FBEA00884BB1 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		68A25B832882FBEA00884BB1 /* MediaAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaAction.swift; sourceTree = "<group>"; };
+		68A25B892882FBF300884BB1 /* QuestGraphNodeSG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphNodeSG.swift; sourceTree = "<group>"; };
+		68A25B8A2882FBF300884BB1 /* QuestGraphSG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphSG.swift; sourceTree = "<group>"; };
+		68A25B8B2882FBF300884BB1 /* QuestGraphActionEdgeSG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphActionEdgeSG.swift; sourceTree = "<group>"; };
+		68A25B8C2882FBF300884BB1 /* QuestGraphNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphNode.swift; sourceTree = "<group>"; };
+		68A25B8D2882FBF300884BB1 /* QuestGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraph.swift; sourceTree = "<group>"; };
+		68A25B8E2882FBF300884BB1 /* QuestGraphActionEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphActionEdge.swift; sourceTree = "<group>"; };
 		68C757A22829B85000B76F9E /* HeadQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeadQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C757A52829B85000B76F9E /* HeadQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestApp.swift; sourceTree = "<group>"; };
 		68C757A72829B85000B76F9E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +91,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68A25B7D2882FBC200884BB1 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				68A25B7E2882FBC200884BB1 /* QuestGraphFixtures.swift */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		68A25B802882FBEA00884BB1 /* GameStateMachine */ = {
+			isa = PBXGroup;
+			children = (
+				68A25B812882FBEA00884BB1 /* GameStateMachine.swift */,
+				68A25B822882FBEA00884BB1 /* State.swift */,
+				68A25B832882FBEA00884BB1 /* MediaAction.swift */,
+			);
+			path = GameStateMachine;
+			sourceTree = "<group>";
+		};
+		68A25B872882FBF300884BB1 /* QuestGraph */ = {
+			isa = PBXGroup;
+			children = (
+				68A25B882882FBF300884BB1 /* SwiftGraphImplementation */,
+				68A25B8C2882FBF300884BB1 /* QuestGraphNode.swift */,
+				68A25B8D2882FBF300884BB1 /* QuestGraph.swift */,
+				68A25B8E2882FBF300884BB1 /* QuestGraphActionEdge.swift */,
+			);
+			name = QuestGraph;
+			path = HeadQuest/QuestGraph;
+			sourceTree = SOURCE_ROOT;
+		};
+		68A25B882882FBF300884BB1 /* SwiftGraphImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				68A25B892882FBF300884BB1 /* QuestGraphNodeSG.swift */,
+				68A25B8A2882FBF300884BB1 /* QuestGraphSG.swift */,
+				68A25B8B2882FBF300884BB1 /* QuestGraphActionEdgeSG.swift */,
+			);
+			path = SwiftGraphImplementation;
+			sourceTree = "<group>";
+		};
 		68C757992829B85000B76F9E = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +154,9 @@
 		68C757A42829B85000B76F9E /* HeadQuest */ = {
 			isa = PBXGroup;
 			children = (
+				68A25B872882FBF300884BB1 /* QuestGraph */,
+				68A25B802882FBEA00884BB1 /* GameStateMachine */,
+				68A25B7D2882FBC200884BB1 /* Fixtures */,
 				68C757A52829B85000B76F9E /* HeadQuestApp.swift */,
 				68C757A72829B85000B76F9E /* ContentView.swift */,
 				68C757A92829B85200B76F9E /* Assets.xcassets */,
@@ -257,7 +320,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68A25B912882FBF300884BB1 /* QuestGraphActionEdgeSG.swift in Sources */,
+				68A25B862882FBEA00884BB1 /* MediaAction.swift in Sources */,
 				68C757A82829B85000B76F9E /* ContentView.swift in Sources */,
+				68A25B922882FBF300884BB1 /* QuestGraphNode.swift in Sources */,
+				68A25B842882FBEA00884BB1 /* GameStateMachine.swift in Sources */,
+				68A25B902882FBF300884BB1 /* QuestGraphSG.swift in Sources */,
+				68A25B7F2882FBC200884BB1 /* QuestGraphFixtures.swift in Sources */,
+				68A25B932882FBF300884BB1 /* QuestGraph.swift in Sources */,
+				68A25B942882FBF300884BB1 /* QuestGraphActionEdge.swift in Sources */,
+				68A25B852882FBEA00884BB1 /* State.swift in Sources */,
+				68A25B8F2882FBF300884BB1 /* QuestGraphNodeSG.swift in Sources */,
 				68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
