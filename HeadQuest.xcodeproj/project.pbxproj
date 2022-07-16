@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		681619CF2883101200E8CEF6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681619CE2883101200E8CEF6 /* AudioToolbox.framework */; };
+		681619D228835A9B00E8CEF6 /* GameStateMachineImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681619D128835A9B00E8CEF6 /* GameStateMachineImplementation.swift */; };
 		68A25B7F2882FBC200884BB1 /* QuestGraphFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B7E2882FBC200884BB1 /* QuestGraphFixtures.swift */; };
 		68A25B842882FBEA00884BB1 /* GameStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B812882FBEA00884BB1 /* GameStateMachine.swift */; };
 		68A25B852882FBEA00884BB1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B822882FBEA00884BB1 /* State.swift */; };
@@ -18,8 +20,10 @@
 		68A25B932882FBF300884BB1 /* QuestGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8D2882FBF300884BB1 /* QuestGraph.swift */; };
 		68A25B942882FBF300884BB1 /* QuestGraphActionEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8E2882FBF300884BB1 /* QuestGraphActionEdge.swift */; };
 		68A25B972882FC8300884BB1 /* SwiftGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 68A25B962882FC8300884BB1 /* SwiftGraph */; };
+		68A25B9A2883038100884BB1 /* AudioSynthes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B992883038100884BB1 /* AudioSynthes.swift */; };
+		68A25B9C288303B300884BB1 /* MediaButtonsRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */; };
 		68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A52829B85000B76F9E /* HeadQuestApp.swift */; };
-		68C757A82829B85000B76F9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A72829B85000B76F9E /* ContentView.swift */; };
+		68C757A82829B85000B76F9E /* DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A72829B85000B76F9E /* DemoView.swift */; };
 		68C757AA2829B85200B76F9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C757A92829B85200B76F9E /* Assets.xcassets */; };
 		68C757AD2829B85200B76F9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C757AC2829B85200B76F9E /* Preview Assets.xcassets */; };
 		68C757B72829B85300B76F9E /* HeadQuestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757B62829B85300B76F9E /* HeadQuestTests.swift */; };
@@ -45,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		681619CC2883101200E8CEF6 /* HeadQuest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HeadQuest.entitlements; sourceTree = "<group>"; };
+		681619CE2883101200E8CEF6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		681619D02883516500E8CEF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		681619D128835A9B00E8CEF6 /* GameStateMachineImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateMachineImplementation.swift; sourceTree = "<group>"; };
 		68A25B7E2882FBC200884BB1 /* QuestGraphFixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphFixtures.swift; sourceTree = "<group>"; };
 		68A25B812882FBEA00884BB1 /* GameStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStateMachine.swift; sourceTree = "<group>"; };
 		68A25B822882FBEA00884BB1 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -55,9 +63,11 @@
 		68A25B8C2882FBF300884BB1 /* QuestGraphNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphNode.swift; sourceTree = "<group>"; };
 		68A25B8D2882FBF300884BB1 /* QuestGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraph.swift; sourceTree = "<group>"; };
 		68A25B8E2882FBF300884BB1 /* QuestGraphActionEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphActionEdge.swift; sourceTree = "<group>"; };
+		68A25B992883038100884BB1 /* AudioSynthes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSynthes.swift; sourceTree = "<group>"; };
+		68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaButtonsRegistrator.swift; sourceTree = "<group>"; };
 		68C757A22829B85000B76F9E /* HeadQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeadQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C757A52829B85000B76F9E /* HeadQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestApp.swift; sourceTree = "<group>"; };
-		68C757A72829B85000B76F9E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		68C757A72829B85000B76F9E /* DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoView.swift; sourceTree = "<group>"; };
 		68C757A92829B85200B76F9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68C757AC2829B85200B76F9E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		68C757B22829B85300B76F9E /* HeadQuestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeadQuestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68A25B972882FC8300884BB1 /* SwiftGraph in Frameworks */,
+				681619CF2883101200E8CEF6 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		681619CD2883101200E8CEF6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				681619CE2883101200E8CEF6 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		68A25B7D2882FBC200884BB1 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +152,15 @@
 			path = SwiftGraphImplementation;
 			sourceTree = "<group>";
 		};
+		68A25B982883038100884BB1 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				68A25B992883038100884BB1 /* AudioSynthes.swift */,
+				68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		68C757992829B85000B76F9E = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +168,7 @@
 				68C757B52829B85300B76F9E /* HeadQuestTests */,
 				68C757BF2829B85300B76F9E /* HeadQuestUITests */,
 				68C757A32829B85000B76F9E /* Products */,
+				681619CD2883101200E8CEF6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,13 +185,17 @@
 		68C757A42829B85000B76F9E /* HeadQuest */ = {
 			isa = PBXGroup;
 			children = (
+				681619D02883516500E8CEF6 /* Info.plist */,
+				681619CC2883101200E8CEF6 /* HeadQuest.entitlements */,
+				68A25B982883038100884BB1 /* utils */,
 				68A25B872882FBF300884BB1 /* QuestGraph */,
 				68A25B802882FBEA00884BB1 /* GameStateMachine */,
 				68A25B7D2882FBC200884BB1 /* Fixtures */,
 				68C757A52829B85000B76F9E /* HeadQuestApp.swift */,
-				68C757A72829B85000B76F9E /* ContentView.swift */,
+				68C757A72829B85000B76F9E /* DemoView.swift */,
 				68C757A92829B85200B76F9E /* Assets.xcassets */,
 				68C757AB2829B85200B76F9E /* Preview Content */,
+				681619D128835A9B00E8CEF6 /* GameStateMachineImplementation.swift */,
 			);
 			path = HeadQuest;
 			sourceTree = "<group>";
@@ -329,9 +362,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				68A25B912882FBF300884BB1 /* QuestGraphActionEdgeSG.swift in Sources */,
+				681619D228835A9B00E8CEF6 /* GameStateMachineImplementation.swift in Sources */,
+				68A25B9A2883038100884BB1 /* AudioSynthes.swift in Sources */,
 				68A25B862882FBEA00884BB1 /* MediaAction.swift in Sources */,
-				68C757A82829B85000B76F9E /* ContentView.swift in Sources */,
+				68C757A82829B85000B76F9E /* DemoView.swift in Sources */,
 				68A25B922882FBF300884BB1 /* QuestGraphNode.swift in Sources */,
+				68A25B9C288303B300884BB1 /* MediaButtonsRegistrator.swift in Sources */,
 				68A25B842882FBEA00884BB1 /* GameStateMachine.swift in Sources */,
 				68A25B902882FBF300884BB1 /* QuestGraphSG.swift in Sources */,
 				68A25B7F2882FBC200884BB1 /* QuestGraphFixtures.swift in Sources */,
@@ -495,12 +531,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HeadQuest/HeadQuest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HeadQuest/Preview Content\"";
 				DEVELOPMENT_TEAM = R5QQN58SRF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HeadQuest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -524,12 +562,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HeadQuest/HeadQuest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HeadQuest/Preview Content\"";
 				DEVELOPMENT_TEAM = R5QQN58SRF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HeadQuest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
