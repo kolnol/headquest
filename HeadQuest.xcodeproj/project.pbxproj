@@ -17,6 +17,7 @@
 		68A25B922882FBF300884BB1 /* QuestGraphNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8C2882FBF300884BB1 /* QuestGraphNode.swift */; };
 		68A25B932882FBF300884BB1 /* QuestGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8D2882FBF300884BB1 /* QuestGraph.swift */; };
 		68A25B942882FBF300884BB1 /* QuestGraphActionEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8E2882FBF300884BB1 /* QuestGraphActionEdge.swift */; };
+		68A25B972882FC8300884BB1 /* SwiftGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 68A25B962882FC8300884BB1 /* SwiftGraph */; };
 		68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A52829B85000B76F9E /* HeadQuestApp.swift */; };
 		68C757A82829B85000B76F9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A72829B85000B76F9E /* ContentView.swift */; };
 		68C757AA2829B85200B76F9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C757A92829B85200B76F9E /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68A25B972882FC8300884BB1 /* SwiftGraph in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +208,9 @@
 			dependencies = (
 			);
 			name = HeadQuest;
+			packageProductDependencies = (
+				68A25B962882FC8300884BB1 /* SwiftGraph */,
+			);
 			productName = HeadQuest;
 			productReference = 68C757A22829B85000B76F9E /* HeadQuest.app */;
 			productType = "com.apple.product-type.application";
@@ -278,6 +283,9 @@
 				Base,
 			);
 			mainGroup = 68C757992829B85000B76F9E;
+			packageReferences = (
+				68A25B952882FC8300884BB1 /* XCRemoteSwiftPackageReference "SwiftGraph" */,
+			);
 			productRefGroup = 68C757A32829B85000B76F9E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -656,6 +664,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		68A25B952882FC8300884BB1 /* XCRemoteSwiftPackageReference "SwiftGraph" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/davecom/SwiftGraph.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		68A25B962882FC8300884BB1 /* SwiftGraph */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68A25B952882FC8300884BB1 /* XCRemoteSwiftPackageReference "SwiftGraph" */;
+			productName = SwiftGraph;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 68C7579A2829B85000B76F9E /* Project object */;
 }
