@@ -25,10 +25,22 @@ class MediaButtonsRegistrator{
     private func setupMediaPlayerNotifications(OnPlay:@escaping ()->Void, OnNextTrack:@escaping ()->Void,OnPreviousTrack:@escaping ()->Void){
         let commandCenter = MPRemoteCommandCenter.shared()
         
+        commandCenter.stopCommand.addTarget(handler: {  event in
+            print("Stop")
+            return .success
+        })
+        
+        commandCenter.togglePlayPauseCommand.addTarget(handler: {  event in
+            print("OnToggle")
+            OnPlay()
+            return .success
+        })
+        
         commandCenter.playCommand.addTarget(handler: {  event in
             OnPlay()
             return .success
         })
+    
         
         commandCenter.nextTrackCommand.addTarget(handler: {  event in
             OnNextTrack()

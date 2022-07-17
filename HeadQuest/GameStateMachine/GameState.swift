@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol State {
+protocol GameState {
     var questText: String {get}
     func invoke() -> Void
 }
