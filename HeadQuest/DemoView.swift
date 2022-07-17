@@ -49,6 +49,7 @@ struct ContentView: View {
     
     private func OnPlay(){
         print("OnPlay")
+        self.synthesizer.stopSpeaking(at:AVSpeechBoundary.immediate)
         self.game.reactToMediaKey(mediaAction: MediaActions.Play)
         self.tellDescriptionOfNode(node:self.game.currentNode)
         OnPostReact()
@@ -56,6 +57,7 @@ struct ContentView: View {
     
     private func OnNextTrack(){
         print("OnNextTrack")
+        self.synthesizer.stopSpeaking(at:AVSpeechBoundary.immediate)
         self.game.reactToMediaKey(mediaAction: MediaActions.NextTrack)
         self.tellDescriptionOfNode(node:self.game.currentNode)
         OnPostReact()
@@ -63,6 +65,7 @@ struct ContentView: View {
     
     private func OnPreviousTrack(){
         print("OnPreviousTrack")
+        self.synthesizer.stopSpeaking(at:AVSpeechBoundary.immediate)
         self.game.reactToMediaKey(mediaAction: MediaActions.PreviousTrack)
         self.tellDescriptionOfNode(node:self.game.currentNode)
         OnPostReact()
