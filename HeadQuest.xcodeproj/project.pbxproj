@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		681619CF2883101200E8CEF6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681619CE2883101200E8CEF6 /* AudioToolbox.framework */; };
 		681619D228835A9B00E8CEF6 /* GameStateMachineImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681619D128835A9B00E8CEF6 /* GameStateMachineImplementation.swift */; };
+		68A1C0572895C95A00444549 /* dungeon_backgraound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 68A1C0562895C95A00444549 /* dungeon_backgraound.mp3 */; };
+		68A1C0592895C9BC00444549 /* GameAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A1C0582895C9BC00444549 /* GameAudioPlayer.swift */; };
 		68A25B7F2882FBC200884BB1 /* QuestGraphFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B7E2882FBC200884BB1 /* QuestGraphFixtures.swift */; };
 		68A25B842882FBEA00884BB1 /* GameStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B812882FBEA00884BB1 /* GameStateMachine.swift */; };
 		68A25B852882FBEA00884BB1 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B822882FBEA00884BB1 /* GameState.swift */; };
@@ -53,6 +55,8 @@
 		681619CE2883101200E8CEF6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		681619D02883516500E8CEF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		681619D128835A9B00E8CEF6 /* GameStateMachineImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateMachineImplementation.swift; sourceTree = "<group>"; };
+		68A1C0562895C95A00444549 /* dungeon_backgraound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dungeon_backgraound.mp3; sourceTree = "<group>"; };
+		68A1C0582895C9BC00444549 /* GameAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAudioPlayer.swift; sourceTree = "<group>"; };
 		68A25B7E2882FBC200884BB1 /* QuestGraphFixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphFixtures.swift; sourceTree = "<group>"; };
 		68A25B812882FBEA00884BB1 /* GameStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStateMachine.swift; sourceTree = "<group>"; };
 		68A25B822882FBEA00884BB1 /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
@@ -112,6 +116,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		68A1C0552895C95A00444549 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				68A1C0562895C95A00444549 /* dungeon_backgraound.mp3 */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
 		68A25B7D2882FBC200884BB1 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +169,7 @@
 			children = (
 				68A25B992883038100884BB1 /* AudioSynthes.swift */,
 				68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */,
+				68A1C0582895C9BC00444549 /* GameAudioPlayer.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -185,6 +198,7 @@
 		68C757A42829B85000B76F9E /* HeadQuest */ = {
 			isa = PBXGroup;
 			children = (
+				68A1C0552895C95A00444549 /* audio */,
 				681619D02883516500E8CEF6 /* Info.plist */,
 				681619CC2883101200E8CEF6 /* HeadQuest.entitlements */,
 				68A25B982883038100884BB1 /* utils */,
@@ -337,6 +351,7 @@
 			files = (
 				68C757AD2829B85200B76F9E /* Preview Assets.xcassets in Resources */,
 				68C757AA2829B85200B76F9E /* Assets.xcassets in Resources */,
+				68A1C0572895C95A00444549 /* dungeon_backgraound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +385,7 @@
 				68A25B9C288303B300884BB1 /* MediaButtonsRegistrator.swift in Sources */,
 				68A25B842882FBEA00884BB1 /* GameStateMachine.swift in Sources */,
 				68A25B902882FBF300884BB1 /* QuestGraphSG.swift in Sources */,
+				68A1C0592895C9BC00444549 /* GameAudioPlayer.swift in Sources */,
 				68A25B7F2882FBC200884BB1 /* QuestGraphFixtures.swift in Sources */,
 				68A25B932882FBF300884BB1 /* QuestGraph.swift in Sources */,
 				68A25B942882FBF300884BB1 /* QuestGraphActionEdge.swift in Sources */,

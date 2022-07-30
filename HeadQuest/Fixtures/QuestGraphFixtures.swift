@@ -15,7 +15,7 @@ struct QuestGraphFixtures{
         
         let skeletonFightV = QuestGraphNodeSG(
                                             name: "Skeleton Fight",
-                                            description: "You open the door. In the middle of the room you see a huge golden throne on which sits a skeleton. He looks huge. You can attack, come back or try to sneak. What do you choose?" + createButtonsSuggestion(onPrevAction: "sneak", onPlayAction: "come back", onNextAction: "attack"))
+                                            description: "You open the door. In the middle of the room you see a huge golden throne on which sits a skeleton. He looks huge. You can attack, come back or try to sneak. What do you choose?" + createButtonsSuggestion(onPrevAction: "attack", onPlayAction: "come back", onNextAction: "sneak"))
         
         let fireDoorV = QuestGraphNodeSG(name: "Fire Door", description: "You open the door and see an old man who is constantly talking something about his honor. You can attack, come back, talk to him, or try to ignore him and go through the room." + createButtonsSuggestion(onPrevAction: "attack", onPlayAction: "talk", onNextAction: "come back"))
         let keyDoorV = QuestGraphNodeSG(name: "Key door/Easy win", description: "You found the exit congrats.", isEnd: true)
