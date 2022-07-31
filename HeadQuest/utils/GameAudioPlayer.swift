@@ -10,8 +10,8 @@ import AVFoundation
 
 // Based on https://developer.apple.com/documentation/avfaudio/avaudioengine
 class GameAudioPlayer {
-    let audioEngine :AVAudioEngine
-    let playerNode :AVAudioPlayerNode
+    private let audioEngine :AVAudioEngine
+    private let playerNode :AVAudioPlayerNode
     
     init(){
         audioEngine = AVAudioEngine()
@@ -21,7 +21,7 @@ class GameAudioPlayer {
         audioEngine.attach(playerNode)
     }
     
-    func play(fileName: String) throws {
+    func play(fileName: String, loop:Bool, onPlayed: @escaping ()->Void) throws {
         
         let audioFile = try self.createAudioFile(fileName: fileName)
         let audioBuffer  = try self.writeFileToBuffer(audioFile: audioFile)
@@ -31,7 +31,11 @@ class GameAudioPlayer {
                             to: audioEngine.outputNode,
                             format: audioFile.processingFormat)
         
-        playerNode.scheduleBuffer(audioBuffer, at: nil, options: [.interruptsAtLoop, .loops])
+        let options:AVAudioPlayerNodeBufferOptions = loop ? [.interruptsAtLoop, .loops] : []
+        
+        playerNode.scheduleBuffer(audioBuffer, at: nil, options: options, completionCallbackType: AVAudioPlayerNodeCompletionCallbackType.dataPlayedBack) {_ in
+            onPlayed()
+        }
         
         do {
             try audioEngine.start()
@@ -74,10 +78,10 @@ class GameAudioPlayer {
     }
     
     private func getFileUrl(fileName:String) throws -> URL{
-        let fileType = try self.extractAudioFileFormat(fileName: fileName)
+        let audio = try self.splitFileNameAndFormat(fileName: fileName)
         // Load a sound file URL
         guard let fileURL = Bundle.main.url(
-            forResource: fileName, withExtension: fileType
+            forResource: audio.name, withExtension: audio.extension
         ) else {
             throw GameAudioPlayerError.fileNotFound(fileName: fileName, messgae: "Cannot create url for the file name.")
         }
@@ -85,7 +89,7 @@ class GameAudioPlayer {
         return fileURL
     }
     
-    private func  extractAudioFileFormat(fileName:String) throws ->String{
+    private func  splitFileNameAndFormat(fileName:String) throws -> (name: String, extension: String){
         guard let fileType = fileName.split(separator: ".").last else{
             throw GameAudioPlayerError.invalidFileFormat(fileName: fileName, message: "Cannot parse format of the file.")
         }
@@ -94,7 +98,26 @@ class GameAudioPlayer {
             throw GameAudioPlayerError.invalidFileFormat(fileName: fileName, message: "Cannot parse format of the file.")
         }
         
-        return String(fileType)
+        let name = fileName.replacingOccurrences(of: ".\(fileType)", with: "")
+        
+        return (name: name, extension: String(fileType))
+    }
+}
+
+class GameAudioPlayerWithMultipleAudios {
+    private let audioEngine :AVAudioEngine
+    private let audioMixer:AVAudioMixerNode
+    
+    init() {
+        audioEngine = AVAudioEngine()
+        audioMixer = AVAudioMixerNode()
+        
+        audioEngine.attach(audioMixer)
+        audioEngine.connect(audioMixer, to: audioEngine.outputNode, format: nil)
+    }
+    
+    func play(fileNames:[String], fileNamesToLoop:[String]){
+        
     }
 }
 

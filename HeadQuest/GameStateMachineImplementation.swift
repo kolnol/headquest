@@ -23,6 +23,8 @@ class GameStateMachineImplementation{
     
     func reactToMediaKey(mediaAction: MediaActions) {
         self.synthesizer.stopSpeaking(at:AVSpeechBoundary.immediate)
+        
+        // Find current node
         if let edge = self.actionToEdge(mediaAction: mediaAction, node: self.currentNode, graph: gameGraph){
             let nextNode = self.gameGraph.traverse(questNode: self.currentNode, action: edge)!
             if nextNode.name == "Come Back" {
@@ -33,12 +35,46 @@ class GameStateMachineImplementation{
             }
         }// TODO add action if no edges found
         
-        // OnReact
-        self.tellDescriptionOfNode(node:self.currentNode)
+        do{
+            try self.playAudio(OnAudioPlayed: {
+                // OnReact
+                self.tellDescriptionOfNode(node:self.currentNode)
+            })
+        }catch let error{
+            print("Cannot play audio because of " + error.localizedDescription)
+        }
+    }
+    
+    func playAudio(OnAudioPlayed: @escaping ()->Void) throws {
+        if let preVoiceSound = self.currentNode.preVoiceSound {
+            try self.audioPlayer.play(fileName: preVoiceSound, loop: false, onPlayed: {
+                if let backgroundMusicFile = self.currentNode.backgroundMusicFile {
+                    do{
+                        try self.audioPlayer.play(fileName: backgroundMusicFile, loop: true, onPlayed: {
+                            
+                        })
+                        sleep(2)
+                        OnAudioPlayed()
+                    }catch{
+                        print("Something went wrong")
+                    }
+                }
+            })
+        }
+        //TODO add possibility to play several audios
     }
     
     func startGame(){
-        tellDescriptionOfNode(node: self.currentNode)
+        do {
+            try self.playAudio(OnAudioPlayed: {
+                self.tellDescriptionOfNode(node:self.currentNode)
+            })
+        } catch GameAudioPlayerError.invalidFileFormat(let fileName, let message){
+            print("Cannot play audio because of invalid file format in \(fileName) with message \(message)")
+        } catch let error {
+                print(error)
+        }
+
     }
     
     private func tellDescriptionOfNode(node: QuestGraphNodeSG){
@@ -63,6 +99,7 @@ class GameStateMachineImplementation{
     }
     
     func reset(){
+        self.audioPlayer.stop()
         if !self.isEnd(){
             self.synthesizer.stopSpeaking(at:AVSpeechBoundary.immediate)
         }

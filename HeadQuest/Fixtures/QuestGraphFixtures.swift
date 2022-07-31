@@ -11,7 +11,8 @@ struct QuestGraphFixtures{
     static func SimpleQuest() -> QuestGraphSG {
         let startV = QuestGraphNodeSG(
                                     name: "Start",
-                                    description: "Welcome to the demo of the Head Quest. You are in the dungeon. In front of you, you have three doors: one with skeleton, one with fire and one with key on it. Which one do you choose?." + createButtonsSuggestion(onPrevAction: "skeleton door", onPlayAction: "Fire Door", onNextAction: "Key Door"))
+                                    description: "Welcome to the demo of the Head Quest. You are in the dungeon. In front of you, you have three doors: one with skeleton, one with fire and one with key on it. Which one do you choose?." + createButtonsSuggestion(onPrevAction: "skeleton door", onPlayAction: "Fire Door", onNextAction: "Key Door"),
+                                    backgroundMusicFile: "dungeon_backgraound.mp3", preVoiceSound: "dungeon_door_open_short.wav")
         
         let skeletonFightV = QuestGraphNodeSG(
                                             name: "Skeleton Fight",
