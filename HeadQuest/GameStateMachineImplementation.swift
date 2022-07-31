@@ -45,6 +45,7 @@ class GameStateMachineImplementation{
     }
     
     func OnPreReact(){
+        self.audioPlayer.stop()
         self.synthesizer.stop()
     }
     
@@ -77,6 +78,8 @@ class GameStateMachineImplementation{
             try self.audioPlayer.playSound(fileName: preVoiceSound, onPlayed: {
                 OnAudioPlayed()
             })
+        }else{
+            OnAudioPlayed()
         }
         //TODO add possibility to play several audios
     }

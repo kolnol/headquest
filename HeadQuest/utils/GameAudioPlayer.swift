@@ -116,10 +116,19 @@ class GameAudioPlayerWithMultipleAudios {
     }
     
     func stop(){
-        backgroundAudioNode.stop()
-        soundsPlayerNodes.forEach { node in
-                node.stop()
-        }
+        audioEngine.stop()
+//        backgroundAudioNode.stop()
+//        soundsPlayerNodes.forEach { node in
+//                node.stop()
+//        }
+    }
+    
+    func pause(){
+        audioEngine.pause()
+//        backgroundAudioNode.stop()
+//        soundsPlayerNodes.forEach { node in
+//                node.stop()
+//        }
     }
 }
 
