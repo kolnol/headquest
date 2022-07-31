@@ -12,7 +12,7 @@ struct QuestGraphFixtures{
         let startV = QuestGraphNodeSG(
                                     name: "Start",
                                     description: "Welcome to the demo of the Head Quest. You are in the dungeon. In front of you, you have three doors: one with skeleton, one with fire and one with key on it. Which one do you choose?." + createButtonsSuggestion(onPrevAction: "skeleton door", onPlayAction: "Fire Door", onNextAction: "Key Door"),
-                                    backgroundMusicFile: "dungeon_backgraound.mp3", preVoiceSound: "dungeon_door_open_short.wav")
+                                    backgroundMusicFile: "dungeon_backgraound.mp3", preVoiceSound: "dungeon_door_open.wav")
         
         let skeletonFightV = QuestGraphNodeSG(
                                             name: "Skeleton Fight",
@@ -23,7 +23,7 @@ struct QuestGraphFixtures{
         let sneakingV = QuestGraphNodeSG(name: "Win by sneaking", description: "You pass the skeleton and exit the dungeon. Sneaky bastard wins.", isEnd: true)
         let attackV = QuestGraphNodeSG(name: "Attack Skeleton", description: "The fighting mechanic is not implemented yet so... Oponent sees your attack and burns you alive. GG.", isEnd: true)
         let teaV = QuestGraphNodeSG(name: "Win by tea", description: "The old man tells you a story about his past by pooring a cup of tea. You have a great conversation. After that old man shows you the way to the exit. Win.", isEnd: true)
-        let comeBackV = QuestGraphNodeSG(name: "Come Back", description: "You decide to come back in the previous room")
+        let comeBackV = QuestGraphNodeSG(name: "Come Back", description: "You decide to come back in the previous room", isSkipable: true)
         
         let questGraph = QuestGraphSG(vertices: [startV, skeletonFightV, fireDoorV, keyDoorV, sneakingV, attackV, teaV, comeBackV])
         

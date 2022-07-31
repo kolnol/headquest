@@ -24,7 +24,7 @@
 		68A25B932882FBF300884BB1 /* QuestGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8D2882FBF300884BB1 /* QuestGraph.swift */; };
 		68A25B942882FBF300884BB1 /* QuestGraphActionEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B8E2882FBF300884BB1 /* QuestGraphActionEdge.swift */; };
 		68A25B972882FC8300884BB1 /* SwiftGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 68A25B962882FC8300884BB1 /* SwiftGraph */; };
-		68A25B9A2883038100884BB1 /* AudioSynthes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B992883038100884BB1 /* AudioSynthes.swift */; };
+		68A25B9A2883038100884BB1 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B992883038100884BB1 /* SpeechSynthesizer.swift */; };
 		68A25B9C288303B300884BB1 /* MediaButtonsRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */; };
 		68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A52829B85000B76F9E /* HeadQuestApp.swift */; };
 		68C757A82829B85000B76F9E /* DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A72829B85000B76F9E /* DemoView.swift */; };
@@ -71,7 +71,7 @@
 		68A25B8C2882FBF300884BB1 /* QuestGraphNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphNode.swift; sourceTree = "<group>"; };
 		68A25B8D2882FBF300884BB1 /* QuestGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraph.swift; sourceTree = "<group>"; };
 		68A25B8E2882FBF300884BB1 /* QuestGraphActionEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphActionEdge.swift; sourceTree = "<group>"; };
-		68A25B992883038100884BB1 /* AudioSynthes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSynthes.swift; sourceTree = "<group>"; };
+		68A25B992883038100884BB1 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaButtonsRegistrator.swift; sourceTree = "<group>"; };
 		68C757A22829B85000B76F9E /* HeadQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeadQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C757A52829B85000B76F9E /* HeadQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestApp.swift; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 		68A25B982883038100884BB1 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				68A25B992883038100884BB1 /* AudioSynthes.swift */,
+				68A25B992883038100884BB1 /* SpeechSynthesizer.swift */,
 				68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */,
 				68A1C0582895C9BC00444549 /* GameAudioPlayer.swift */,
 			);
@@ -386,7 +386,7 @@
 			files = (
 				68A25B912882FBF300884BB1 /* QuestGraphActionEdgeSG.swift in Sources */,
 				681619D228835A9B00E8CEF6 /* GameStateMachineImplementation.swift in Sources */,
-				68A25B9A2883038100884BB1 /* AudioSynthes.swift in Sources */,
+				68A25B9A2883038100884BB1 /* SpeechSynthesizer.swift in Sources */,
 				68A25B862882FBEA00884BB1 /* MediaAction.swift in Sources */,
 				68C757A82829B85000B76F9E /* DemoView.swift in Sources */,
 				68A25B922882FBF300884BB1 /* QuestGraphNode.swift in Sources */,

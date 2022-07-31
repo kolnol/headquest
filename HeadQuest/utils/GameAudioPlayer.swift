@@ -23,8 +23,8 @@ class GameAudioPlayer {
     
     func play(fileName: String, loop:Bool, onPlayed: @escaping ()->Void) throws {
         
-        let audioFile = try self.createAudioFile(fileName: fileName)
-        let audioBuffer  = try self.writeFileToBuffer(audioFile: audioFile)
+        let audioFile = try GameAudioUtils.createAudioFile(fileName: fileName)
+        let audioBuffer  = try GameAudioUtils.writeFileToBuffer(audioFile: audioFile)
         
         // Connect the player node to the output node.
         audioEngine.connect(playerNode,
@@ -52,9 +52,89 @@ class GameAudioPlayer {
     func pause(){
         self.playerNode.pause()
     }
+}
+
+class GameAudioPlayerWithMultipleAudios {
+    private let audioEngine :AVAudioEngine
+    private let audioMixer:AVAudioMixerNode
+    private let backgroundAudioNode: AVAudioPlayerNode
+    private var soundsPlayerNodes: [AVAudioPlayerNode]
     
-    private func createAudioFile(fileName:String) throws -> AVAudioFile {
-        let audioFileUrl = try self.getFileUrl(fileName: fileName)
+    init() {
+        audioEngine = AVAudioEngine()
+        audioMixer = AVAudioMixerNode()
+        backgroundAudioNode = AVAudioPlayerNode()
+        soundsPlayerNodes = []
+        
+        audioEngine.attach(audioMixer)
+        audioEngine.connect(audioMixer, to: audioEngine.outputNode, format: nil)
+        audioEngine.attach(backgroundAudioNode)
+        audioEngine.connect(backgroundAudioNode, to: audioMixer, format: nil)
+    }
+    
+    func startBackgroundMusic(backGroundMusicFileName: String, onPlayed: @escaping ()->Void) throws {
+        let audioFile = try GameAudioUtils.createAudioFile(fileName: backGroundMusicFileName)
+        let audioBuffer  = try GameAudioUtils.writeFileToBuffer(audioFile: audioFile)
+        
+        let options:AVAudioPlayerNodeBufferOptions = [.interruptsAtLoop, .loops]
+        
+        backgroundAudioNode.scheduleBuffer(audioBuffer, at: nil, options: options, completionCallbackType: AVAudioPlayerNodeCompletionCallbackType.dataPlayedBack) {_ in
+            onPlayed()
+        }
+        
+        do {
+            try audioEngine.start()
+            backgroundAudioNode.play()
+        } catch let error {
+            throw GameAudioPlayerError.playbackError(fileName: backGroundMusicFileName, message: "Cannot start audio engine", nestedError:error)
+        }
+    }
+    
+    func playSound(fileName: String, onPlayed: @escaping ()->Void) throws {
+        let audioFile = try GameAudioUtils.createAudioFile(fileName: fileName)
+        let audioBuffer  = try GameAudioUtils.writeFileToBuffer(audioFile: audioFile)
+        
+        soundsPlayerNodes.append(AVAudioPlayerNode())
+        let playerNode = soundsPlayerNodes.last!
+        audioEngine.attach(playerNode)
+        
+        // Connect the player node to the output node.
+        audioEngine.connect(playerNode,
+                            to: audioMixer,
+                            format: audioFile.processingFormat)
+        
+        playerNode.scheduleBuffer(audioBuffer, at: nil, options: [], completionCallbackType: AVAudioPlayerNodeCompletionCallbackType.dataPlayedBack) {_ in
+            onPlayed()
+        }
+        
+        do {
+            try audioEngine.start()
+            playerNode.play()
+        } catch let error {
+            throw GameAudioPlayerError.playbackError(fileName: fileName, message: "Cannot start audio engine", nestedError:error)
+        }
+    }
+    
+    func stop(){
+        backgroundAudioNode.stop()
+        soundsPlayerNodes.forEach { node in
+                node.stop()
+        }
+    }
+}
+
+enum GameAudioPlayerError: Error {
+    case invalidFileFormat(fileName:String, message:String)
+    case fileNotFound(fileName:String, messgae:String)
+    case cannotReadFile(fileName:String, message:String, nestedError:Error)
+    case cannotConvertFileToBuffer(audioFile:AVAudioFile, message:String, nestedError: Error)
+    case cannotCreateBuffer(audioFile:AVAudioFile, message:String)
+    case playbackError(fileName: String, message:String, nestedError:Error)
+}
+
+class GameAudioUtils {
+    public static func createAudioFile(fileName:String) throws -> AVAudioFile {
+        let audioFileUrl = try getFileUrl(fileName: fileName)
 
         do{
             let audioFile = try AVAudioFile(forReading: audioFileUrl)
@@ -64,7 +144,7 @@ class GameAudioPlayer {
         }
     }
     
-    private func writeFileToBuffer(audioFile:AVAudioFile) throws ->AVAudioPCMBuffer {
+    public static func writeFileToBuffer(audioFile:AVAudioFile) throws ->AVAudioPCMBuffer {
         guard let audioBuffer = AVAudioPCMBuffer(pcmFormat: audioFile.processingFormat, frameCapacity: AVAudioFrameCount(audioFile.length)) else {
             throw GameAudioPlayerError.cannotCreateBuffer(audioFile: audioFile, message: "Cannot create buffer for audio file")
         }
@@ -77,8 +157,8 @@ class GameAudioPlayer {
         }
     }
     
-    private func getFileUrl(fileName:String) throws -> URL{
-        let audio = try self.splitFileNameAndFormat(fileName: fileName)
+    public static func getFileUrl(fileName:String) throws -> URL{
+        let audio = try splitFileNameAndFormat(fileName: fileName)
         // Load a sound file URL
         guard let fileURL = Bundle.main.url(
             forResource: audio.name, withExtension: audio.extension
@@ -89,7 +169,7 @@ class GameAudioPlayer {
         return fileURL
     }
     
-    private func  splitFileNameAndFormat(fileName:String) throws -> (name: String, extension: String){
+    public static func  splitFileNameAndFormat(fileName:String) throws -> (name: String, extension: String){
         guard let fileType = fileName.split(separator: ".").last else{
             throw GameAudioPlayerError.invalidFileFormat(fileName: fileName, message: "Cannot parse format of the file.")
         }
@@ -103,30 +183,3 @@ class GameAudioPlayer {
         return (name: name, extension: String(fileType))
     }
 }
-
-class GameAudioPlayerWithMultipleAudios {
-    private let audioEngine :AVAudioEngine
-    private let audioMixer:AVAudioMixerNode
-    
-    init() {
-        audioEngine = AVAudioEngine()
-        audioMixer = AVAudioMixerNode()
-        
-        audioEngine.attach(audioMixer)
-        audioEngine.connect(audioMixer, to: audioEngine.outputNode, format: nil)
-    }
-    
-    func play(fileNames:[String], fileNamesToLoop:[String]){
-        
-    }
-}
-
-enum GameAudioPlayerError: Error {
-    case invalidFileFormat(fileName:String, message:String)
-    case fileNotFound(fileName:String, messgae:String)
-    case cannotReadFile(fileName:String, message:String, nestedError:Error)
-    case cannotConvertFileToBuffer(audioFile:AVAudioFile, message:String, nestedError: Error)
-    case cannotCreateBuffer(audioFile:AVAudioFile, message:String)
-    case playbackError(fileName: String, message:String, nestedError:Error)
-}
-

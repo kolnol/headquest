@@ -11,81 +11,78 @@ import AVFoundation
 class GameStateMachineImplementation{
     var gameGraph:QuestGraphSG
     var currentNode:QuestGraphNodeSG
-    let synthesizer: AVSpeechSynthesizer
-    let audioPlayer : GameAudioPlayer
+    let synthesizer: SpeechSynthesizer
+    let audioPlayer : GameAudioPlayerWithMultipleAudios
     
     init() {
         self.gameGraph = QuestGraphFixtures.SimpleQuest()
         self.currentNode = self.gameGraph.vertexAtIndex(0)
-        self.synthesizer = AVSpeechSynthesizer()
-        self.audioPlayer = GameAudioPlayer()
+        self.synthesizer = SpeechSynthesizer()
+        self.audioPlayer = GameAudioPlayerWithMultipleAudios()
     }
     
     func reactToMediaKey(mediaAction: MediaActions) {
-        self.synthesizer.stopSpeaking(at:AVSpeechBoundary.immediate)
+        self.OnPreReact()
         
-        // Find current node
+        // Find new current node
         if let edge = self.actionToEdge(mediaAction: mediaAction, node: self.currentNode, graph: gameGraph){
             let nextNode = self.gameGraph.traverse(questNode: self.currentNode, action: edge)!
-            if nextNode.name == "Come Back" {
-                let e = self.actionToEdge(mediaAction: MediaActions.PreviousTrack, node: nextNode, graph: gameGraph)! //TODO fix this workaround
-                self.currentNode = self.gameGraph.traverse(questNode: nextNode, action: e)!
+            if nextNode.isSkipable {
+                self.synthesizer.speak(nextNode.description, OnFinish: {
+                    let e = self.actionToEdge(mediaAction: MediaActions.PreviousTrack, node: nextNode, graph: self.gameGraph)! //TODO fix this workaround
+                    self.currentNode = self.gameGraph.traverse(questNode: nextNode, action: e)!
+                    
+                    self.OnReactToNode()
+                    self.OnPostReact()
+                })
             }else{
                 self.currentNode = nextNode
+                
+                self.OnReactToNode()
+                self.OnPostReact()
             }
         }// TODO add action if no edges found
+    }
+    
+    func OnPreReact(){
+        self.synthesizer.stop()
+    }
+    
+    func OnPostReact(){
         
-        do{
-            try self.playAudio(OnAudioPlayed: {
-                // OnReact
-                self.tellDescriptionOfNode(node:self.currentNode)
-            })
-        }catch let error{
-            print("Cannot play audio because of " + error.localizedDescription)
-        }
     }
     
-    func playAudio(OnAudioPlayed: @escaping ()->Void) throws {
-        if let preVoiceSound = self.currentNode.preVoiceSound {
-            try self.audioPlayer.play(fileName: preVoiceSound, loop: false, onPlayed: {
-                if let backgroundMusicFile = self.currentNode.backgroundMusicFile {
-                    do{
-                        try self.audioPlayer.play(fileName: backgroundMusicFile, loop: true, onPlayed: {
-                            
-                        })
-                        sleep(2)
-                        OnAudioPlayed()
-                    }catch{
-                        print("Something went wrong")
-                    }
-                }
-            })
-        }
-        //TODO add possibility to play several audios
+    func OnReactToEdge(){
+        
     }
     
-    func startGame(){
+    func OnReactToNode(){
         do {
             try self.playAudio(OnAudioPlayed: {
-                self.tellDescriptionOfNode(node:self.currentNode)
+                self.synthesizer.speak(self.currentNode.description)
             })
         } catch GameAudioPlayerError.invalidFileFormat(let fileName, let message){
             print("Cannot play audio because of invalid file format in \(fileName) with message \(message)")
         } catch let error {
                 print(error)
         }
-
     }
     
-    private func tellDescriptionOfNode(node: QuestGraphNodeSG){
-        let utterance = AVSpeechUtterance(string: node.description)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-        //utterance.voice = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.siri_male_en-AU_compact")
-        //utterance.pitchMultiplier = 0.5
-        //let myRate:Float = 0.3
-        //let rate = myRate * (AVSpeechUtteranceMaximumSpeechRate - AVSpeechUtteranceMinimumSpeechRate) + AVSpeechUtteranceMinimumSpeechRate
-        //utterance.rate = rate
-        self.synthesizer.speak(utterance)
+    func playAudio(OnAudioPlayed: @escaping ()->Void) throws {
+        if let backgroundMusicFile = self.currentNode.backgroundMusicFile {
+                try self.audioPlayer.startBackgroundMusic(backGroundMusicFileName: backgroundMusicFile, onPlayed: {})
+        }
+        
+        if let preVoiceSound = self.currentNode.preVoiceSound {
+            try self.audioPlayer.playSound(fileName: preVoiceSound, onPlayed: {
+                OnAudioPlayed()
+            })
+        }
+        //TODO add possibility to play several audios
+    }
+    
+    func startGame(){
+        OnReactToNode()
     }
     
     // TODO make it better
@@ -101,7 +98,7 @@ class GameStateMachineImplementation{
     func reset(){
         self.audioPlayer.stop()
         if !self.isEnd(){
-            self.synthesizer.stopSpeaking(at:AVSpeechBoundary.immediate)
+            self.synthesizer.stop()
         }
         self.gameGraph = QuestGraphFixtures.SimpleQuest()
         self.currentNode = self.gameGraph.vertexAtIndex(0)
