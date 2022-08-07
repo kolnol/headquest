@@ -51,27 +51,26 @@ struct ContentView: View {
         let mediaButtonsRegistrator = MediaButtonsRegistrator()
         mediaButtonsRegistrator.register(OnPlay: { () in OnMediaButton(mediaAction: MediaActions.Play) },
                                          OnNextTrack: { () in OnMediaButton(mediaAction: MediaActions.NextTrack) },
-                                         OnPreviousTrack: { () in OnMediaButton(mediaAction: MediaActions.PreviousTrack) }
-        )
+                                         OnPreviousTrack: { () in OnMediaButton(mediaAction: MediaActions.PreviousTrack) })
     }
 
-    func onStartButton(){
+    func onStartButton() {
         print("Start button pressed...")
-        Task.init{
+        Task.init {
             print("Starting gaeme in UI")
             try! await self.game.startGame()
         }
 
         print("Started task")
-        self.startButtonEnabled = false
+        startButtonEnabled = false
     }
 
-    func OnTestButton(){
-        Task.init{
+    func OnTestButton() {
+        Task.init {
             print("Starting gaeme in UI")
             try! await self.game.startGame()
         }
-        self.startButtonEnabled = false
+        startButtonEnabled = false
 
         // sleep for 5 seconds
         sleep(5)
@@ -80,7 +79,6 @@ struct ContentView: View {
 
         sleep(5)
         OnMediaButton(mediaAction: MediaActions.Play)
-
     }
 
     private func OnMediaButton(mediaAction: MediaActions) {

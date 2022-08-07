@@ -13,7 +13,6 @@ internal class SpeechSynthesizer: NSObject, ObservableObject {
     private let synthesizer: AVSpeechSynthesizer = .init()
     private var OnFinish: (() -> Void)?
 
-
     override init() {
         super.init()
         synthesizer.delegate = self
@@ -47,15 +46,12 @@ extension SpeechSynthesizer: AVSpeechSynthesizerDelegate {
     }
 }
 
-
-
 internal class SpeechSynthesizerAsync: NSObject, ObservableObject {
     private typealias SpeechContinuation = CheckedContinuation<Void, Never>
 
     private var speechContinuation: SpeechContinuation?
     internal var errorDescription: String?
     private let synthesizer: AVSpeechSynthesizer = .init()
-
 
     override init() {
         super.init()
@@ -70,9 +66,9 @@ internal class SpeechSynthesizerAsync: NSObject, ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
             synthesizer.speak(utterance)
-            await withCheckedContinuation({ (continuation: SpeechContinuation) in
+            await withCheckedContinuation { (continuation: SpeechContinuation) in
                 self.speechContinuation = continuation
-            })
+            }
         } catch {
             errorDescription = error.localizedDescription
             print("Cannot speak \(String(describing: errorDescription))")

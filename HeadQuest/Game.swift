@@ -21,11 +21,11 @@ class Game {
 
     func reactToMediaKey(mediaAction: MediaActions) {
         // only updates currentNode
-        var currentNode:QuestGraphNodeSG? = nil
+        var currentNode: QuestGraphNodeSG?
 
-        do{
+        do {
             currentNode = try gameStateMachine.updateStateByAction(mediaAction: mediaAction)
-        }catch let error{
+        } catch {
             print("Error during getting current node \(error.localizedDescription)")
             return
         }
@@ -35,10 +35,10 @@ class Game {
             return
         }
 
-        processNode(node:currentNode!)
+        processNode(node: currentNode!)
     }
 
-    func processNode(node:QuestGraphNodeSG) {
+    func processNode(node: QuestGraphNodeSG) {
         if playerTask != nil {
             print("Cancelling running player...")
             playerTask!.cancel()
@@ -47,14 +47,14 @@ class Game {
         }
 
         playerTask = Task.init {
-            do{
+            do {
                 try await playAudioAsync(node: node)
 
-                if node.isSkipable{
+                if node.isSkipable {
                     try gameStateMachine.goNext()
                     processNode(node: gameStateMachine.currentNode)
                 }
-            }catch let error{
+            } catch {
                 print("Error during playing \(error.localizedDescription)")
             }
         }
@@ -69,8 +69,8 @@ class Game {
         }
 
         if let backgroundMusicFile = node.backgroundMusicFile {
-            //task init to not await until the background music is done playing
-            Task.init{
+            // task init to not await until the background music is done playing
+            Task.init {
                 try await audioPlayer!.startBackgroundMusicAsync(backGroundMusicFileName: backgroundMusicFile)
             }
         }
@@ -92,28 +92,28 @@ class Game {
         }
 
         await synthesizer.speak(node.description)
-        
+
         if Task.isCancelled {
             print("Playing task was cancelled")
-            self.audioPlayer!.stop()
-            self.synthesizer.stop()
+            audioPlayer!.stop()
+            synthesizer.stop()
             return
         }
 
-        // TODO Make the sound to appear after speak
+        // TODO: Make the sound to appear after speak
         if let postVoiceSound = node.postVoiceSound {
-            Task{
-                try await self.audioPlayer!.playSoundAsync(fileName: postVoiceSound)}
+            Task {
+                try await self.audioPlayer!.playSoundAsync(fileName: postVoiceSound)
+            }
         }
-
     }
 
     func startGame() async throws {
         print("Starting gaeme in Game engine")
         playerTask = Task.init {
-            do{
+            do {
                 try await playAudioAsync(node: gameStateMachine.currentNode)
-            }catch let error{
+            } catch {
                 print("Error during playing \(error.localizedDescription)")
             }
         }
@@ -145,8 +145,8 @@ class GameStateMachineImplementationNew {
 
     func updateStateByAction(mediaAction: MediaActions) throws -> QuestGraphNodeSG {
         // Find new current node
-        guard let edge = try? actionToEdge(mediaAction: mediaAction, node: currentNode, graph: gameGraph) else
-        {
+        guard let edge = try? actionToEdge(mediaAction: mediaAction, node: currentNode, graph: gameGraph)
+        else {
             throw GameStateMachineError.noEdgeFound(message: "No edge found from node \(currentNode.name) by action \(mediaAction).")
         }
 
@@ -158,16 +158,16 @@ class GameStateMachineImplementationNew {
         return currentNode
     }
 
-    func goNext() throws{
+    func goNext() throws {
         if !currentNode.isSkipable {
             throw GameStateMachineError.notSkipableState(message: "Go next is not possible as it is not clear to which state to go")
         }
 
         guard let edges = gameGraph.edgesForVertex(currentNode) else {
-            throw GameStateMachineError.noEdgeFound(message:"No edges found for the node \(currentNode.name)")
+            throw GameStateMachineError.noEdgeFound(message: "No edges found for the node \(currentNode.name)")
         }
 
-        if edges.count != 1{
+        if edges.count != 1 {
             throw GameStateMachineError.notSkipableState(message: "Go next is not possible as it is not clear to which state to go")
         }
 
@@ -182,7 +182,7 @@ class GameStateMachineImplementationNew {
     // TODO: make it better
     private func actionToEdge(mediaAction: MediaActions, node: QuestGraphNodeSG, graph: QuestGraphSG) throws -> QuestGraphActionEdgeSG {
         guard let edges = graph.edgesForVertex(node) else {
-            throw GameStateMachineError.noEdgeFound(message:"No edges found for the node \(node.name)")
+            throw GameStateMachineError.noEdgeFound(message: "No edges found for the node \(node.name)")
         }
 
         return edges[mediaAction.rawValue].weight
@@ -198,19 +198,19 @@ class GameStateMachineImplementationNew {
     }
 }
 
-enum GameStateMachineError: Error{
-    case noEdgeFound(message:String)
-    case noNodeFound(message:String)
-    case notSkipableState(message:String)
+enum GameStateMachineError: Error {
+    case noEdgeFound(message: String)
+    case noNodeFound(message: String)
+    case notSkipableState(message: String)
 }
 
-extension GameStateMachineError:LocalizedError{
-    public var errorDescription: String?{
+extension GameStateMachineError: LocalizedError {
+    public var errorDescription: String? {
         switch self {
         case
-            .noEdgeFound(let message),
-            .noNodeFound(let message),
-            .notSkipableState(let message):
+            let .noEdgeFound(message),
+            let .noNodeFound(message),
+            let .notSkipableState(message):
             return message
         }
     }

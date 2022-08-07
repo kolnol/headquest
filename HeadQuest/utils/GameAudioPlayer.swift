@@ -227,7 +227,7 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
 
         let options: AVAudioPlayerNodeBufferOptions = loop ? [.interruptsAtLoop, .loops] : []
 
-        let t = Task{await playerNode!.scheduleBuffer(audioBuffer, at: nil, options: options, completionCallbackType: AVAudioPlayerNodeCompletionCallbackType.dataPlayedBack)}
+        let t = Task { await playerNode!.scheduleBuffer(audioBuffer, at: nil, options: options, completionCallbackType: AVAudioPlayerNodeCompletionCallbackType.dataPlayedBack) }
 
         if !audioEngine.isRunning {
             try startEngine()

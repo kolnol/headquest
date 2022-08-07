@@ -87,23 +87,22 @@ func mediaCallbackPlayPressed(game: GameTest) {
     print("Media done")
 }
 
-//var game = GameTest()
+// var game = GameTest()
 
-//Task.init {
+// Task.init {
 //    mediaCallbackPlayPressed(game: game)
 //
 //    try await Task.sleep(nanoseconds: 2_000_000_000)
 //    print("canceling by clicking again")
 //    mediaCallbackPlayPressed(game: game)
-//}
+// }
 
-
-//var s = SpeechSynthesizer()
+// var s = SpeechSynthesizer()
 //
-//print("Start speaking")
-//
-//
-//await s.speak("Testing speaker")
+// print("Start speaking")
 //
 //
-//print("Done speaking")
+// await s.speak("Testing speaker")
+//
+//
+// print("Done speaking")
