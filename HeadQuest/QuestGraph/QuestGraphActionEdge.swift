@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol QuestGraphActionEdge{
-    var name: String {get}
+protocol QuestGraphActionEdge {
+    var name: String { get }
 }

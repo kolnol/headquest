@@ -8,7 +8,7 @@
 import Foundation
 
 protocol GameStateMachine {
-    var currState :GameState {get}
-    func reactToAction(action:MediaAction) -> GameState
+    var currState: GameState { get }
+    func reactToAction(action: MediaAction) -> GameState
     func reset() -> GameState
 }

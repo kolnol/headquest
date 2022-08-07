@@ -5,114 +5,119 @@
 //  Created by Mykola Odnoshyvkin on 16.07.22.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
-class GameStateMachineImplementation{
-    var gameGraph:QuestGraphSG
-    var currentNode:QuestGraphNodeSG
+class GameStateMachineImplementation {
+    var gameGraph: QuestGraphSG
+    var currentNode: QuestGraphNodeSG
     let synthesizer: SpeechSynthesizer
-    let audioPlayer : GameAudioPlayerWithMultipleAudios
-    
+    var audioPlayer: GameAudioPlayerWithMultipleAudios?
+
     init() {
-        self.gameGraph = QuestGraphFixtures.SimpleQuest()
-        self.currentNode = self.gameGraph.vertexAtIndex(0)
-        self.synthesizer = SpeechSynthesizer()
-        self.audioPlayer = GameAudioPlayerWithMultipleAudios()
+        gameGraph = QuestGraphFixtures.SimpleQuest()
+        currentNode = gameGraph.vertexAtIndex(0)
+        synthesizer = SpeechSynthesizer()
+        // self.audioPlayer = GameAudioPlayerWithMultipleAudios()
     }
-    
+
     func reactToMediaKey(mediaAction: MediaActions) {
-        self.OnPreReact()
-        
+        OnPreReact()
+
         // Find new current node
-        if let edge = self.actionToEdge(mediaAction: mediaAction, node: self.currentNode, graph: gameGraph){
-            let nextNode = self.gameGraph.traverse(questNode: self.currentNode, action: edge)!
+        if let edge = actionToEdge(mediaAction: mediaAction, node: currentNode, graph: gameGraph) {
+            let nextNode = gameGraph.traverse(questNode: currentNode, action: edge)!
             if nextNode.isSkipable {
-                self.synthesizer.speak(nextNode.description, OnFinish: {
-                    let e = self.actionToEdge(mediaAction: MediaActions.PreviousTrack, node: nextNode, graph: self.gameGraph)! //TODO fix this workaround
+                synthesizer.speak(nextNode.description, OnFinish: {
+                    let e = self.actionToEdge(mediaAction: MediaActions.PreviousTrack, node: nextNode, graph: self.gameGraph)! // TODO: fix this workaround
                     self.currentNode = self.gameGraph.traverse(questNode: nextNode, action: e)!
-                    
+
                     self.OnReactToNode()
                     self.OnPostReact()
                 })
-            }else{
-                self.currentNode = nextNode
-                
-                self.OnReactToNode()
-                self.OnPostReact()
+            } else {
+                currentNode = nextNode
+
+                OnReactToNode()
+                OnPostReact()
             }
-        }// TODO add action if no edges found
+        } // TODO: add action if no edges found
     }
-    
-    func OnPreReact(){
-        self.audioPlayer.stop()
-        self.synthesizer.stop()
-    }
-    
-    func OnPostReact(){
-        
-    }
-    
-    func OnReactToEdge(){
-        
-    }
-    
-    func OnReactToNode(){
+
+    func OnPreReact() {
+        audioPlayer?.stop()
+        synthesizer.stop()
         do {
-            try self.playAudio(OnAudioPlayed: {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
+    func OnPostReact() {
+        print("Post rteact")
+    }
+
+    func OnReactToEdge() {}
+
+    func OnReactToNode() {
+        do {
+            try playAudio(OnAudioPlayed: {
                 self.synthesizer.speak(self.currentNode.description)
             })
-        } catch GameAudioPlayerError.invalidFileFormat(let fileName, let message){
+        } catch let GameAudioPlayerError.invalidFileFormat(fileName, message) {
             print("Cannot play audio because of invalid file format in \(fileName) with message \(message)")
-        } catch let error {
-                print(error)
+        } catch {
+            print(error)
         }
     }
-    
-    func playAudio(OnAudioPlayed: @escaping ()->Void) throws {
-        if let backgroundMusicFile = self.currentNode.backgroundMusicFile {
-                try self.audioPlayer.startBackgroundMusic(backGroundMusicFileName: backgroundMusicFile, onPlayed: {})
+
+    func playAudio(OnAudioPlayed: @escaping () -> Void) throws {
+        try audioPlayer = GameAudioPlayerWithMultipleAudios(backGroundMusicFileName: currentNode.backgroundMusicFile, soundsFileNames: [currentNode.preVoiceSound, currentNode.postVoiceSound])
+
+        if let backgroundMusicFile = currentNode.backgroundMusicFile {
+            try audioPlayer!.startBackgroundMusic(backGroundMusicFileName: backgroundMusicFile, onPlayed: {})
         }
-        
-        if let preVoiceSound = self.currentNode.preVoiceSound {
-            try self.audioPlayer.playSound(fileName: preVoiceSound, onPlayed: {
+
+        if let preVoiceSound = currentNode.preVoiceSound {
+            try audioPlayer!.playSound(fileName: preVoiceSound, onPlayed: {
                 OnAudioPlayed()
             })
-        }else{
+        } else {
             OnAudioPlayed()
         }
-        //TODO add possibility to play several audios
+        // TODO: add possibility to play several audios
     }
-    
-    func startGame(){
+
+    func startGame() {
         OnReactToNode()
     }
-    
-    // TODO make it better
-    private func actionToEdge(mediaAction: MediaActions, node:QuestGraphNodeSG, graph: QuestGraphSG)-> QuestGraphActionEdgeSG?{
+
+    // TODO: make it better
+    private func actionToEdge(mediaAction: MediaActions, node: QuestGraphNodeSG, graph: QuestGraphSG) -> QuestGraphActionEdgeSG? {
         if let edges = graph.edgesForVertex(node) {
             return edges[mediaAction.rawValue].weight
-        }else{
+        } else {
             print("No edges found for the node \(node.name)")
         }
         return nil
     }
-    
-    func reset(){
-        self.audioPlayer.stop()
-        if !self.isEnd(){
-            self.synthesizer.stop()
+
+    func reset() {
+        audioPlayer?.stop()
+        if !isEnd() {
+            synthesizer.stop()
         }
-        self.gameGraph = QuestGraphFixtures.SimpleQuest()
-        self.currentNode = self.gameGraph.vertexAtIndex(0)
+        gameGraph = QuestGraphFixtures.SimpleQuest()
+        currentNode = gameGraph.vertexAtIndex(0)
     }
-    
-    func isEnd() -> Bool{
-        return self.currentNode.isEnd
+
+    func isEnd() -> Bool {
+        return currentNode.isEnd
     }
 }
 
-enum MediaActions:Int{
+enum MediaActions: Int {
     case Play = 1
     case PreviousTrack = 0
     case NextTrack = 2

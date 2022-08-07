@@ -8,6 +8,6 @@
 import Foundation
 
 protocol GameState {
-    var questText: String {get}
+    var questText: String { get }
     func invoke() -> Void
 }
