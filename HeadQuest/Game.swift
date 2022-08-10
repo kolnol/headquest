@@ -14,8 +14,8 @@ class Game {
     var audioPlayer: GameAudioPlayerWithMultipleAudiosWithAsync?
     var playerTask: Task<Void, Never>?
 
-    init() {
-        gameStateMachine = GameStateMachineImplementationNew()
+    init(gameGraph: QuestGraphSG) {
+        gameStateMachine = GameStateMachineImplementationNew(gameGraph: gameGraph)
         synthesizer = SpeechSynthesizerAsync()
     }
 
@@ -43,16 +43,19 @@ class Game {
             print("Cancelling running player...")
             playerTask!.cancel()
             audioPlayer!.stop()
-            synthesizer.stop()
         }
 
-        playerTask = Task.init {
+        playerTask = Task {
             do {
                 try await playAudioAsync(node: node)
 
                 if node.isSkipable {
                     try gameStateMachine.goNext()
                     processNode(node: gameStateMachine.currentNode)
+                }
+
+                if isEnd() {
+                    print("Done playing")
                 }
             } catch {
                 print("Error during playing \(error.localizedDescription)")
@@ -91,7 +94,13 @@ class Game {
             return
         }
 
+        // The below line does not work as delegation does not work
         await synthesizer.speak(node.description)
+
+//        var speechAudioBufferOptional = await synthesizer.generateAudioBuffer(node.description)
+//        if let speechAudioBuffer = speechAudioBufferOptional {
+//            try await audioPlayer!.playSpeech(speechAudioBuffer: speechAudioBuffer)
+//        }
 
         if Task.isCancelled {
             print("Playing task was cancelled")
@@ -100,7 +109,6 @@ class Game {
             return
         }
 
-        // TODO: Make the sound to appear after speak
         if let postVoiceSound = node.postVoiceSound {
             Task {
                 try await self.audioPlayer!.playSoundAsync(fileName: postVoiceSound)
@@ -108,15 +116,9 @@ class Game {
         }
     }
 
-    func startGame() async throws {
+    func startGame() throws {
         print("Starting gaeme in Game engine")
-        playerTask = Task.init {
-            do {
-                try await playAudioAsync(node: gameStateMachine.currentNode)
-            } catch {
-                print("Error during playing \(error.localizedDescription)")
-            }
-        }
+        processNode(node: gameStateMachine.currentNode)
     }
 
     func reset() {
@@ -138,8 +140,8 @@ class GameStateMachineImplementationNew {
     var gameGraph: QuestGraphSG
     var currentNode: QuestGraphNodeSG
 
-    init() {
-        gameGraph = QuestGraphFixtures.SimpleQuest()
+    init(gameGraph: QuestGraphSG) {
+        self.gameGraph = gameGraph
         currentNode = gameGraph.vertexAtIndex(0)
     }
 
@@ -189,7 +191,6 @@ class GameStateMachineImplementationNew {
     }
 
     func reset() {
-        gameGraph = QuestGraphFixtures.SimpleQuest()
         currentNode = gameGraph.vertexAtIndex(0)
     }
 

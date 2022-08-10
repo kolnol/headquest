@@ -160,6 +160,7 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
     private let audioMixer: AVAudioMixerNode
     private var backgroundAudioNode: AVAudioPlayerNode?
     private var soundsPlayerNodes: [String: AVAudioPlayerNode?]
+    private var speechAudioNode: AVAudioPlayerNode
 
     init(backGroundMusicFileName: String?, soundsFileNames: [String?]) throws {
         audioEngine = AVAudioEngine()
@@ -176,6 +177,10 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
             audioEngine.attach(backgroundAudioNode!)
             audioEngine.connect(backgroundAudioNode!, to: audioMixer, format: nil)
         }
+
+        speechAudioNode = AVAudioPlayerNode()
+        audioEngine.attach(speechAudioNode)
+        audioEngine.connect(speechAudioNode, to: audioMixer, format: nil)
 
         for soundFileName in soundsFileNames {
             if soundFileName == nil {
@@ -217,6 +222,15 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
         try await playAsync(fileName: fileName, loop: false)
     }
 
+    func playSpeech(speechAudioBuffer: AVAudioBuffer) async throws {
+        guard let speechPcmBuffer = speechAudioBuffer as? AVAudioPCMBuffer else {
+            print("unknow buffer type: \(speechAudioBuffer)")
+            return
+        }
+
+        try await playBufferAsync(audioBuffer: speechPcmBuffer, loop: false, playerNode: speechAudioNode)
+    }
+
     func playAsync(fileName: String, loop: Bool) async throws {
         guard let playerNode = soundsPlayerNodes[fileName] else {
             throw GameAudioPlayerError.playerNodeCreationError(fileName: fileName, message: "No player node with this file is found", nestedError: nil)
@@ -225,9 +239,13 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
         let audioFile = try GameAudioUtils.createAudioFile(fileName: fileName)
         let audioBuffer = try GameAudioUtils.writeFileToBuffer(audioFile: audioFile)
 
+        try await playBufferAsync(audioBuffer: audioBuffer, loop: loop, playerNode: playerNode!)
+    }
+
+    func playBufferAsync(audioBuffer: AVAudioPCMBuffer, loop: Bool, playerNode: AVAudioPlayerNode) async throws {
         let options: AVAudioPlayerNodeBufferOptions = loop ? [.interruptsAtLoop, .loops] : []
 
-        let t = Task { await playerNode!.scheduleBuffer(audioBuffer, at: nil, options: options, completionCallbackType: AVAudioPlayerNodeCompletionCallbackType.dataPlayedBack) }
+        let t = Task { await playerNode.scheduleBuffer(audioBuffer, at: nil, options: options, completionCallbackType: AVAudioPlayerNodeCompletionCallbackType.dataPlayedBack) }
 
         if !audioEngine.isRunning {
             try startEngine()
@@ -235,7 +253,7 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
 
         // todo does this needs to be async and awaitable as well?
         // no the played callback is in scheduleBuffer task
-        playerNode!.play()
+        playerNode.play()
 
         await t.result
     }

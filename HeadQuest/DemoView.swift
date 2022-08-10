@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var startButtonEnabled: Bool
 
     init() {
-        game = Game()
+        game = Game(gameGraph: QuestGraphFixtures.SimpleQuest())
         startButtonEnabled = true
     }
 
@@ -44,6 +44,15 @@ struct ContentView: View {
                     .font(.system(.title, design: .rounded))
             }
             .padding()
+
+            Button {
+                OnTestSkipabilityButton()
+            } label: {
+                Text("Test skipability")
+                    .fontWeight(.bold)
+                    .font(.system(.title, design: .rounded))
+            }
+            .padding()
         }.onAppear(perform: OnAppear)
     }
 
@@ -58,17 +67,25 @@ struct ContentView: View {
         print("Start button pressed...")
         Task.init {
             print("Starting gaeme in UI")
-            try! await self.game.startGame()
+            try! self.game.startGame()
         }
 
         print("Started task")
         startButtonEnabled = false
     }
 
+    func OnTestSkipabilityButton() {
+        Task.init {
+            print("Starting gaeme in UI")
+            try! self.game.startGame()
+        }
+        startButtonEnabled = false
+    }
+
     func OnTestButton() {
         Task.init {
             print("Starting gaeme in UI")
-            try! await self.game.startGame()
+            try! self.game.startGame()
         }
         startButtonEnabled = false
 
@@ -79,14 +96,14 @@ struct ContentView: View {
 
         sleep(5)
         OnMediaButton(mediaAction: MediaActions.Play)
+
+        sleep(10)
+        OnMediaButton(mediaAction: MediaActions.NextTrack)
     }
 
     private func OnMediaButton(mediaAction: MediaActions) {
         print("On Action \(mediaAction)")
-        Task.init {
-            self.game.reactToMediaKey(mediaAction: mediaAction)
-            OnPostReact()
-        }
+        game.reactToMediaKey(mediaAction: mediaAction)
     }
 
     private func OnPostReact() {

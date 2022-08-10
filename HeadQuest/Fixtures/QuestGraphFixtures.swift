@@ -12,7 +12,7 @@ struct QuestGraphFixtures {
         let startV = QuestGraphNodeSG(
             name: "Start",
             description: "Welcome to the demo of the Head Quest. You are in the dungeon. In front of you, you have three doors: one with skeleton, one with fire and one with key on it. Which one do you choose?. " + createButtonsSuggestion(onPrevAction: "skeleton door", onPlayAction: "Fire Door", onNextAction: "Key Door"),
-            backgroundMusicFile: "dungeon_backgraound.mp3", preVoiceSound: "dungeon_door_open.wav"
+            backgroundMusicFile: "dungeon_backgraound.mp3", preVoiceSound: "dungeon_door_open.wav", isSkipable: true
         )
 
         let skeletonFightV = QuestGraphNodeSG(
@@ -42,6 +42,40 @@ struct QuestGraphFixtures {
         questGraph.addEdge(from: fireDoorV, to: comeBackV, weight: QuestGraphActionEdgeSG(name: "come_back"), directed: true)
 
         questGraph.addEdge(from: comeBackV, to: startV, weight: QuestGraphActionEdgeSG(name: "come_back"), directed: true)
+        return questGraph
+    }
+
+    static func TestSkipableQuest() -> QuestGraphSG {
+        let skipableStartingNode = QuestGraphNodeSG(
+            name: "Start",
+            description: "This is a skipable state with music. Please skip me.",
+            backgroundMusicFile: "dungeon_backgraound.mp3", preVoiceSound: "dungeon_door_open.wav", isSkipable: true
+        )
+
+        let secondSkip = QuestGraphNodeSG(
+            name: "After skip",
+            description: "This will be skipped as well",
+            backgroundMusicFile: "dungeon_backgraound.mp3",
+            preVoiceSound: "dungeon_door_open.wav",
+            isSkipable: true
+        )
+
+        let nextNodeAfterSkip = QuestGraphNodeSG(
+            name: "After skip",
+            description: "This node is after skip. Automatically started?",
+            isEnd: true
+        )
+
+        let questGraph = QuestGraphSG(vertices:
+            [
+                skipableStartingNode,
+                secondSkip,
+                nextNodeAfterSkip,
+            ])
+
+        questGraph.addEdge(from: skipableStartingNode, to: secondSkip, weight: QuestGraphActionEdgeSG(name: "Skip action"), directed: true)
+        questGraph.addEdge(from: secondSkip, to: nextNodeAfterSkip, weight: QuestGraphActionEdgeSG(name: "Skip action"), directed: true)
+
         return questGraph
     }
 
