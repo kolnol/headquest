@@ -39,7 +39,7 @@ struct ContentView: View {
             Button {
                 OnTestButton()
             } label: {
-                Text("Test")
+                Text("Test combackines")
                     .fontWeight(.bold)
                     .font(.system(.title, design: .rounded))
             }
@@ -88,17 +88,19 @@ struct ContentView: View {
             try! self.game.startGame()
         }
         startButtonEnabled = false
-
-        // sleep for 5 seconds
-        sleep(5)
+        let i = 5        //for i in 5...20{
+        print("Testing \(i) seconds delay")
+        sleep(UInt32(i))
         print("Pressing button...")
         OnMediaButton(mediaAction: MediaActions.PreviousTrack)
 
-        sleep(5)
+        sleep(UInt32(i))
         OnMediaButton(mediaAction: MediaActions.Play)
-
-        sleep(10)
-        OnMediaButton(mediaAction: MediaActions.NextTrack)
+        
+        sleep(UInt32(10))
+        print("Pressing button...")
+        OnMediaButton(mediaAction: MediaActions.PreviousTrack)
+       // }
     }
 
     private func OnMediaButton(mediaAction: MediaActions) {

@@ -21,7 +21,14 @@ class Game {
 
     func reactToMediaKey(mediaAction: MediaActions) {
         // only updates currentNode
-        var currentNode: QuestGraphNodeSG?
+        var currentNode: QuestGraphNodeSG? = gameStateMachine.currentNode
+
+        // Ignoring events during skipable nodes as they will be played automatically
+        // If allow user to mess around during skipable node it can fuck up the state graph
+        if currentNode?.isSkipable == true {
+            print("[Game] Ignoring user input on skipable node")
+            return
+        }
 
         do {
             currentNode = try gameStateMachine.updateStateByAction(mediaAction: mediaAction)
@@ -38,25 +45,35 @@ class Game {
         processNode(node: currentNode!)
     }
 
-    func processNode(node: QuestGraphNodeSG) {
+    func processNode(node _: QuestGraphNodeSG) {
         if playerTask != nil {
             print("Cancelling running player...")
             playerTask!.cancel()
-            audioPlayer!.stop()
+            audioPlayer?.stop()
         }
 
         playerTask = Task {
             do {
-                try await playAudioAsync(node: node)
-
-                if node.isSkipable {
-                    try gameStateMachine.goNext()
-                    processNode(node: gameStateMachine.currentNode)
+                var internalNode = gameStateMachine.currentNode
+                
+                if !internalNode.isSkipable {
+                    try await playAudioAsync(node: internalNode)
+                    return
                 }
-
+                
+                while internalNode.isSkipable{
+                    try await playAudioAsync(node: internalNode)
+                    print("[Game.PlayerTask] skipable node \(internalNode.name)")
+                    audioPlayer?.stop()
+                    internalNode = try gameStateMachine.goNext()
+                }
+                
+                try await playAudioAsync(node: internalNode)
+                
                 if isEnd() {
                     print("Done playing")
                 }
+
             } catch {
                 print("Error during playing \(error.localizedDescription)")
             }
@@ -97,15 +114,9 @@ class Game {
         // The below line does not work as delegation does not work
         await synthesizer.speak(node.description)
 
-//        var speechAudioBufferOptional = await synthesizer.generateAudioBuffer(node.description)
-//        if let speechAudioBuffer = speechAudioBufferOptional {
-//            try await audioPlayer!.playSpeech(speechAudioBuffer: speechAudioBuffer)
-//        }
-
         if Task.isCancelled {
             print("Playing task was cancelled")
             audioPlayer!.stop()
-            synthesizer.stop()
             return
         }
 
@@ -160,7 +171,7 @@ class GameStateMachineImplementationNew {
         return currentNode
     }
 
-    func goNext() throws {
+    func goNext() throws -> QuestGraphNodeSG {
         if !currentNode.isSkipable {
             throw GameStateMachineError.notSkipableState(message: "Go next is not possible as it is not clear to which state to go")
         }
@@ -179,6 +190,7 @@ class GameStateMachineImplementationNew {
         }
 
         currentNode = newNode
+        return newNode
     }
 
     // TODO: make it better

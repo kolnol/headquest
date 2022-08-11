@@ -1,24 +1,17 @@
 import AVFoundation
 import Combine
-import UIKit
 import Foundation
-
+import UIKit
 
 var s = SpeechSynthesizerAsyncPlayGround()
 
-
-
-
-var t = Task{
-    await s.speak("Testknfdhoansd asdhfopiu asjdhpi poashdfp oashd")
+var t = Task {
+    var p = await s.speak("Testknfdhoansd asdhfopiu asjdhpi poashdfp oashd")
 }
 
 sleep(3)
 print("Stopping task")
 t.cancel()
-
-
-
 
 // testing swift concurency
 // We need something like
@@ -26,7 +19,7 @@ t.cancel()
 // print("OnPlay done")
 // print("Done playing")
 //
-//class Player {
+// class Player {
 //    func playAudioAsync(node: QuestGraphNodeSG) async throws {
 //        print("Start playing \(node.name)")
 //        if Task.isCancelled {
@@ -57,9 +50,9 @@ t.cancel()
 //            print("Some other error")
 //        }
 //    }
-//}
+// }
 //
-//class GameTest {
+// class GameTest {
 //    var player: Player
 //    var currentNode: QuestGraphNodeSG?
 //    var playerTask: Task<Void, Never>?
@@ -93,9 +86,9 @@ t.cancel()
 //            currentNode = QuestGraphNodeSG(name: "Second node", description: "lul2")
 //        }
 //    }
-//}
+// }
 //
-//func mediaCallbackPlayPressed(game: GameTest) {
+// func mediaCallbackPlayPressed(game: GameTest) {
 //    print("Media start")
 //
 //    Task(operation: {
@@ -103,7 +96,7 @@ t.cancel()
 //    })
 //
 //    print("Media done")
-//}
+// }
 //
 //// var game = GameTest()
 //
@@ -114,5 +107,3 @@ t.cancel()
 ////    print("canceling by clicking again")
 ////    mediaCallbackPlayPressed(game: game)
 //// }
-
-

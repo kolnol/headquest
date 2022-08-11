@@ -86,7 +86,16 @@ public class SpeechSynthesizerAsync: NSObject, ObservableObject {
     }
 
     public func stop() {
+        print("[Synthesizer] Stop playing requested")
         synthesizer.stopSpeaking(at: .immediate)
+        if speechContinuation != nil{
+            do{
+                try speechContinuation?.resume()
+            } catch let error{
+                print("[Synthesizer] error during resuming continuation on stopping")
+            }
+            speechContinuation = nil
+        }
     }
 }
 
@@ -106,7 +115,6 @@ extension SpeechSynthesizerAsync: AVSpeechSynthesizerDelegate {
     }
 
     public func speechSynthesizer(_: AVSpeechSynthesizer, willSpeakRangeOfSpeechString _: NSRange, utterance _: AVSpeechUtterance) {
-        print("[Synthesizer] willSpeakRangeOfSpeechString")
+        // print("[Synthesizer] willSpeakRangeOfSpeechString")
     }
 }
-
