@@ -113,7 +113,7 @@ class GameStateMachineImplementation {
     }
 
     func isEnd() -> Bool {
-        return currentNode.isEnd
+        currentNode.isEnd
     }
 }
 

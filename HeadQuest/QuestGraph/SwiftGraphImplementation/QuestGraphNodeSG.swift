@@ -7,7 +7,7 @@
 
 import Foundation
 
-class QuestGraphNodeSG: QuestGraphNode, Decodable, Encodable, Equatable {
+public class QuestGraphNodeSG: QuestGraphNode, Decodable, Encodable, Equatable {
     init(name: String, description: String, isEnd: Bool = false, backgroundMusicFile: String? = nil, preVoiceSound: String? = nil, postVoiceSound: String? = nil, isSkipable: Bool = false) {
         self.name = name
         self.description = description
@@ -39,7 +39,7 @@ class QuestGraphNodeSG: QuestGraphNode, Decodable, Encodable, Equatable {
         self.isSkipable = isSkipable
     }
 
-    static func == (lhs: QuestGraphNodeSG, rhs: QuestGraphNodeSG) -> Bool {
-        return lhs.description == rhs.description && lhs.name == rhs.name
+    public static func == (lhs: QuestGraphNodeSG, rhs: QuestGraphNodeSG) -> Bool {
+        lhs.description == rhs.description && lhs.name == rhs.name
     }
 }

@@ -7,38 +7,48 @@
 
 import AVFoundation
 import Foundation
+import OSLog
 
 class Game {
     var gameStateMachine: GameStateMachineImplementationNew
     let synthesizer: SpeechSynthesizerAsync
     var audioPlayer: GameAudioPlayerWithMultipleAudiosWithAsync?
     var playerTask: Task<Void, Never>?
+    let logger: Logger
 
     init(gameGraph: QuestGraphSG) {
         gameStateMachine = GameStateMachineImplementationNew(gameGraph: gameGraph)
         synthesizer = SpeechSynthesizerAsync()
+        logger = Logger(subsystem: "com.mykola.headquest.game", category: String(describing: Game.self))
     }
 
     func reactToMediaKey(mediaAction: MediaActions) {
+        logger.log(level: .debug, "Recieved new action \(mediaAction.rawValue)")
+
         // only updates currentNode
         var currentNode: QuestGraphNodeSG? = gameStateMachine.currentNode
 
         // Ignoring events during skipable nodes as they will be played automatically
         // If allow user to mess around during skipable node it can fuck up the state graph
         if currentNode?.isSkipable == true {
-            print("[Game] Ignoring user input on skipable node")
+            logger.log(level: .debug, "Ignoring user input on skipable node")
             return
+        }
+
+        if playerTask != nil {
+            logger.log(level: .debug, "Cancelling running player...")
+            playerTask!.cancel()
         }
 
         do {
             currentNode = try gameStateMachine.updateStateByAction(mediaAction: mediaAction)
         } catch {
-            print("Error during getting current node \(error.localizedDescription)")
+            logger.log(level: .debug, "Error during getting current node \(error.localizedDescription)")
             return
         }
 
         if currentNode == nil {
-            print("Received empty current node. Doing nothing.")
+            logger.log(level: .debug, "Received empty current node. Doing nothing.")
             return
         }
 
@@ -47,29 +57,28 @@ class Game {
 
     func processNode(node _: QuestGraphNodeSG) {
         if playerTask != nil {
-            print("Cancelling running player...")
+            logger.log(level: .debug, "Cancelling running player...")
             playerTask!.cancel()
-            audioPlayer?.stop()
         }
 
         playerTask = Task {
             do {
                 var internalNode = gameStateMachine.currentNode
-                
+
                 if !internalNode.isSkipable {
                     try await playAudioAsync(node: internalNode)
                     return
                 }
-                
-                while internalNode.isSkipable{
+
+                while internalNode.isSkipable {
                     try await playAudioAsync(node: internalNode)
-                    print("[Game.PlayerTask] skipable node \(internalNode.name)")
+                    logger.log(level: .debug, "Reached skipable node \(internalNode.name)")
                     audioPlayer?.stop()
                     internalNode = try gameStateMachine.goNext()
                 }
-                
+
                 try await playAudioAsync(node: internalNode)
-                
+
                 if isEnd() {
                     print("Done playing")
                 }
@@ -84,52 +93,56 @@ class Game {
         try audioPlayer = GameAudioPlayerWithMultipleAudiosWithAsync(backGroundMusicFileName: node.backgroundMusicFile, soundsFileNames: [node.preVoiceSound, node.postVoiceSound])
 
         if Task.isCancelled {
-            print("Playing task was cancelled")
+            logger.log(level: .debug, "Playing node <\(node.name)> was cancelled before background music")
             return
         }
 
         if let backgroundMusicFile = node.backgroundMusicFile {
+            logger.log(level: .debug, "Playing background music for node \(node.name)")
             // task init to not await until the background music is done playing
             Task.init {
                 try await audioPlayer!.startBackgroundMusicAsync(backGroundMusicFileName: backgroundMusicFile)
             }
+            logger.log(level: .debug, "Started playing background music task for node \(node.name)")
         }
 
         if Task.isCancelled {
-            print("Playing task was cancelled")
-            audioPlayer!.stop()
+            logger.log(level: .debug, "Playing node <\(node.name)> was cancelled after background music before preVoice")
             return
         }
 
         if let preVoiceSound = node.preVoiceSound {
+            logger.log(level: .debug, "Starting playing preVoice for node \(node.name)")
             try await audioPlayer!.playSoundAsync(fileName: preVoiceSound)
+            logger.log(level: .debug, "Done playing preVoice for node \(node.name)")
         }
 
         if Task.isCancelled {
-            print("Playing task was cancelled")
-            audioPlayer!.stop()
+            logger.log(level: .debug, "Playing node <\(node.name)> was cancelled after preVoice music before speech")
             return
         }
 
-        // The below line does not work as delegation does not work
-        await synthesizer.speak(node.description)
+        logger.log(level: .debug, "Starting speaking for node \(node.name)")
+        try await audioPlayer!.playSpeech(speechFileName: SpeechCacher.nodeNameToSpeechFileName(nodeName: node.name))
+        // await synthesizer.speak(node.description)
+        logger.log(level: .debug, "Done speaking for node \(node.name)")
 
         if Task.isCancelled {
-            print("Playing task was cancelled")
-            audioPlayer!.stop()
+            logger.log(level: .debug, "Playing node <\(node.name)> was cancelled after speech before postVoice")
             return
         }
 
         if let postVoiceSound = node.postVoiceSound {
-            Task {
-                try await self.audioPlayer!.playSoundAsync(fileName: postVoiceSound)
-            }
+            logger.log(level: .debug, "Starting playing postVoice for node \(node.name)")
+            try await audioPlayer!.playSoundAsync(fileName: postVoiceSound)
+            logger.log(level: .debug, "Done playing postVoice for node \(node.name)")
         }
     }
 
     func startGame() throws {
-        print("Starting gaeme in Game engine")
+        logger.log(level: .debug, "Starting gaeme in Game engine")
         processNode(node: gameStateMachine.currentNode)
+        logger.log(level: .debug, "StartGame done")
     }
 
     func reset() {
@@ -143,7 +156,7 @@ class Game {
     }
 
     func isEnd() -> Bool {
-        return gameStateMachine.isEnd()
+        gameStateMachine.isEnd()
     }
 }
 
@@ -207,7 +220,7 @@ class GameStateMachineImplementationNew {
     }
 
     func isEnd() -> Bool {
-        return currentNode.isEnd
+        currentNode.isEnd
     }
 }
 

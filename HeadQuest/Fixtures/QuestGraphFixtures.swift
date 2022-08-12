@@ -21,7 +21,7 @@ struct QuestGraphFixtures {
         )
 
         let fireDoorV = QuestGraphNodeSG(name: "Fire Door", description: "You open the door and see an old man who is constantly talking something about his honor. You can attack, come back, talk to him, or try to ignore him and go through the room. " + createButtonsSuggestion(onPrevAction: "attack", onPlayAction: "talk", onNextAction: "come back"))
-        let keyDoorV = QuestGraphNodeSG(name: "Key door/Easy win", description: "You found the exit congrats.", isEnd: true)
+        let keyDoorV = QuestGraphNodeSG(name: "Key door Easy win", description: "You found the exit congrats.", isEnd: true)
         let sneakingV = QuestGraphNodeSG(name: "Win by sneaking", description: "You pass the skeleton and exit the dungeon. Sneaky bastard wins. ", isEnd: true)
         let attackV = QuestGraphNodeSG(name: "Attack Skeleton", description: "The fighting mechanic is not implemented yet so... Oponent sees your attack and burns you alive. GG. ", isEnd: true)
         let teaV = QuestGraphNodeSG(name: "Win by tea", description: "The old man tells you a story about his past by pooring a cup of tea. You have a great conversation. After that old man shows you the way to the exit. Win. ", isEnd: true)
@@ -49,7 +49,8 @@ struct QuestGraphFixtures {
         let skipableStartingNode = QuestGraphNodeSG(
             name: "Start",
             description: "This is a skipable state with music. Please skip me.",
-            backgroundMusicFile: "dungeon_backgraound.mp3", preVoiceSound: "dungeon_door_open.wav", isSkipable: true
+            backgroundMusicFile: "dungeon_backgraound.mp3", preVoiceSound: "dungeon_door_open.wav",
+            isSkipable: true
         )
 
         let secondSkip = QuestGraphNodeSG(
@@ -61,7 +62,7 @@ struct QuestGraphFixtures {
         )
 
         let nextNodeAfterSkip = QuestGraphNodeSG(
-            name: "After skip",
+            name: "After skip2",
             description: "This node is after skip. Automatically started?",
             isEnd: true
         )
@@ -80,6 +81,10 @@ struct QuestGraphFixtures {
     }
 
     private static func createButtonsSuggestion(onPrevAction: String, onPlayAction: String, onNextAction: String) -> String {
-        return "Press previous button for \(onPrevAction). Press play button for \(onPlayAction). Press next button for \(onNextAction)."
+        "Press previous button for \(onPrevAction). Press play button for \(onPlayAction). Press next button for \(onNextAction)."
+    }
+
+    private static func getLongText() -> String {
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
     }
 }

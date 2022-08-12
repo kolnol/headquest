@@ -165,9 +165,17 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
     init(backGroundMusicFileName: String?, soundsFileNames: [String?]) throws {
         audioEngine = AVAudioEngine()
         audioMixer = AVAudioMixerNode()
+        speechAudioNode = AVAudioPlayerNode()
+
+        soundsPlayerNodes = [:]
+
+        try buildAudioGraph(backGroundMusicFileName: backGroundMusicFileName, soundsFileNames: soundsFileNames)
+        try startEngine()
+    }
+
+    private func buildAudioGraph(backGroundMusicFileName: String?, soundsFileNames: [String?]) throws {
         audioEngine.attach(audioMixer)
         audioEngine.connect(audioMixer, to: audioEngine.outputNode, format: nil)
-        soundsPlayerNodes = [:]
 
         if backGroundMusicFileName == nil {
             print("No Background music is provided")
@@ -178,9 +186,8 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
             audioEngine.connect(backgroundAudioNode!, to: audioMixer, format: nil)
         }
 
-        speechAudioNode = AVAudioPlayerNode()
         audioEngine.attach(speechAudioNode)
-        audioEngine.connect(speechAudioNode, to: audioMixer, format: nil)
+        audioEngine.connect(speechAudioNode, to: audioMixer, format: AVAudioFormat(standardFormatWithSampleRate: 22050, channels: 1))
 
         for soundFileName in soundsFileNames {
             if soundFileName == nil {
@@ -197,8 +204,6 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
                                 to: audioMixer,
                                 format: nil)
         }
-
-        try startEngine()
     }
 
     func startEngine() throws {
@@ -222,11 +227,10 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
         try await playAsync(fileName: fileName, loop: false)
     }
 
-    func playSpeech(speechAudioBuffer: AVAudioBuffer) async throws {
-        guard let speechPcmBuffer = speechAudioBuffer as? AVAudioPCMBuffer else {
-            print("unknow buffer type: \(speechAudioBuffer)")
-            return
-        }
+    func playSpeech(speechFileName: String) async throws {
+        let speechFileUrl = GameAudioUtils.getFileUrlFromDocuments(fileName: speechFileName)
+        let audioFile = try GameAudioUtils.createAudioFileFromUrl(fileUrl: speechFileUrl)
+        let speechPcmBuffer = try GameAudioUtils.writeFileToBuffer(audioFile: audioFile)
 
         try await playBufferAsync(audioBuffer: speechPcmBuffer, loop: false, playerNode: speechAudioNode)
     }
@@ -255,14 +259,16 @@ class GameAudioPlayerWithMultipleAudiosWithAsync {
         // no the played callback is in scheduleBuffer task
         playerNode.play()
 
-        await t.result
+        _ = await withTaskCancellationHandler(handler: {
+            self.stop()
+        }, operation: { await t.result })
     }
 
     func stop() {
-        backgroundAudioNode?.stop()
-        soundsPlayerNodes.values.forEach { node in
-            node?.stop()
-        }
+//        backgroundAudioNode?.stop()
+//        soundsPlayerNodes.values.forEach { node in
+//            node?.stop()
+//        }
 
         audioEngine.stop()
         // try! AVAudioSession.sharedInstance().setActive(false)
@@ -291,11 +297,15 @@ enum GameAudioUtils {
     public static func createAudioFile(fileName: String) throws -> AVAudioFile {
         let audioFileUrl = try getFileUrl(fileName: fileName)
 
+        return try createAudioFileFromUrl(fileUrl: audioFileUrl)
+    }
+
+    public static func createAudioFileFromUrl(fileUrl: URL) throws -> AVAudioFile {
         do {
-            let audioFile = try AVAudioFile(forReading: audioFileUrl)
+            let audioFile = try AVAudioFile(forReading: fileUrl)
             return audioFile
         } catch {
-            throw GameAudioPlayerError.cannotReadFile(fileName: fileName, message: "Cannot open file for reading", nestedError: error)
+            throw GameAudioPlayerError.cannotReadFile(fileName: fileUrl.lastPathComponent, message: "Cannot open file for reading", nestedError: error)
         }
     }
 
@@ -310,6 +320,10 @@ enum GameAudioUtils {
         } catch {
             throw GameAudioPlayerError.cannotConvertFileToBuffer(audioFile: audioFile, message: "Cannot convert audio file to buffer.", nestedError: error)
         }
+    }
+
+    public static func getFileUrlFromDocuments(fileName: String) -> URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(fileName)
     }
 
     public static func getFileUrl(fileName: String) throws -> URL {

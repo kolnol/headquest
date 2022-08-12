@@ -88,10 +88,10 @@ public class SpeechSynthesizerAsync: NSObject, ObservableObject {
     public func stop() {
         print("[Synthesizer] Stop playing requested")
         synthesizer.stopSpeaking(at: .immediate)
-        if speechContinuation != nil{
-            do{
+        if speechContinuation != nil {
+            do {
                 try speechContinuation?.resume()
-            } catch let error{
+            } catch {
                 print("[Synthesizer] error during resuming continuation on stopping")
             }
             speechContinuation = nil

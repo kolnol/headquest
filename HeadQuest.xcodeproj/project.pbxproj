@@ -10,6 +10,9 @@
 		681619CF2883101200E8CEF6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681619CE2883101200E8CEF6 /* AudioToolbox.framework */; };
 		681619D228835A9B00E8CEF6 /* GameStateMachineImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681619D128835A9B00E8CEF6 /* GameStateMachineImplementation.swift */; };
 		684CB130289DE4A30016416D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB12F289DE4A30016416D /* Game.swift */; };
+		684CB13228A5A3F90016416D /* TextToAudioGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13128A5A3F90016416D /* TextToAudioGenerator.swift */; };
+		684CB13428A6E9990016416D /* SpeechCacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13328A6E9990016416D /* SpeechCacher.swift */; };
+		684CB13728A70CE10016416D /* LoggingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13628A70CE10016416D /* LoggingComponent.swift */; };
 		68A1C0572895C95A00444549 /* dungeon_backgraound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 68A1C0562895C95A00444549 /* dungeon_backgraound.mp3 */; };
 		68A1C0592895C9BC00444549 /* GameAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A1C0582895C9BC00444549 /* GameAudioPlayer.swift */; };
 		68A1C05B2895F7D000444549 /* dungeon_door_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68A1C05A2895F7D000444549 /* dungeon_door_open.wav */; };
@@ -59,6 +62,9 @@
 		681619D02883516500E8CEF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		681619D128835A9B00E8CEF6 /* GameStateMachineImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateMachineImplementation.swift; sourceTree = "<group>"; };
 		684CB12F289DE4A30016416D /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		684CB13128A5A3F90016416D /* TextToAudioGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToAudioGenerator.swift; sourceTree = "<group>"; };
+		684CB13328A6E9990016416D /* SpeechCacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechCacher.swift; sourceTree = "<group>"; };
+		684CB13628A70CE10016416D /* LoggingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingComponent.swift; sourceTree = "<group>"; };
 		6897A180289DD89A00D7737B /* testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		68A1C0562895C95A00444549 /* dungeon_backgraound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dungeon_backgraound.mp3; sourceTree = "<group>"; };
 		68A1C0582895C9BC00444549 /* GameAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAudioPlayer.swift; sourceTree = "<group>"; };
@@ -123,6 +129,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		684CB13528A70CCB0016416D /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				684CB13628A70CE10016416D /* LoggingComponent.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 		68A1C0552895C95A00444549 /* audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +193,8 @@
 				68A25B992883038100884BB1 /* SpeechSynthesizer.swift */,
 				68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */,
 				68A1C0582895C9BC00444549 /* GameAudioPlayer.swift */,
+				684CB13128A5A3F90016416D /* TextToAudioGenerator.swift */,
+				684CB13328A6E9990016416D /* SpeechCacher.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -207,6 +223,7 @@
 		68C757A42829B85000B76F9E /* HeadQuest */ = {
 			isa = PBXGroup;
 			children = (
+				684CB13528A70CCB0016416D /* Logging */,
 				68A1C0552895C95A00444549 /* audio */,
 				681619D02883516500E8CEF6 /* Info.plist */,
 				681619CC2883101200E8CEF6 /* HeadQuest.entitlements */,
@@ -399,11 +416,14 @@
 				68A25B842882FBEA00884BB1 /* GameStateMachine.swift in Sources */,
 				68A25B902882FBF300884BB1 /* QuestGraphSG.swift in Sources */,
 				68A1C0592895C9BC00444549 /* GameAudioPlayer.swift in Sources */,
+				684CB13228A5A3F90016416D /* TextToAudioGenerator.swift in Sources */,
+				684CB13728A70CE10016416D /* LoggingComponent.swift in Sources */,
 				68A25B7F2882FBC200884BB1 /* QuestGraphFixtures.swift in Sources */,
 				68A25B932882FBF300884BB1 /* QuestGraph.swift in Sources */,
 				68A25B942882FBF300884BB1 /* QuestGraphActionEdge.swift in Sources */,
 				684CB130289DE4A30016416D /* Game.swift in Sources */,
 				68A25B852882FBEA00884BB1 /* GameState.swift in Sources */,
+				684CB13428A6E9990016416D /* SpeechCacher.swift in Sources */,
 				68A25B8F2882FBF300884BB1 /* QuestGraphNodeSG.swift in Sources */,
 				68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */,
 			);
