@@ -121,4 +121,13 @@ enum MediaActions: Int {
     case Play = 1
     case PreviousTrack = 0
     case NextTrack = 2
+    
+    var description : String {
+        switch self {
+        // Use Internationalization, as appropriate.
+        case .Play: return "PlayMediaActions"
+        case .PreviousTrack: return "PreviousTrackMediaActions"
+        case .NextTrack: return "NextTrackMediaActions"
+        }
+      }
 }

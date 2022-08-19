@@ -12,9 +12,9 @@ protocol TextToAudioFileGeneratorProtocol {
     func generateAudio(_ text: String, outputFilePath: String) async
 }
 
-class TextToAudioFileGenerator: TextToAudioFileGeneratorProtocol {
+class TextToAudioFileGenerator: LoggingComponent, TextToAudioFileGeneratorProtocol {
     let synthesizer = AVSpeechSynthesizer()
-
+    
     func generateAudio(_ text: String, outputFilePath: String) async {
         let outputFileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(outputFilePath)
         await generateAudio(text, outputFilePathUrl: outputFileUrl)
@@ -31,7 +31,7 @@ class TextToAudioFileGenerator: TextToAudioFileGeneratorProtocol {
                 }
                 if pcmBuffer.frameLength == 0 {
                     // done
-                    print("[TextToAudioFileGenerator] Done converting text to audio file \(outputFilePathUrl)")
+                    self.logger.info("Done converting text to audio file \(outputFilePathUrl)")
                     continuation.resume()
                 } else {
                     // append buffer to file
@@ -46,14 +46,14 @@ class TextToAudioFileGenerator: TextToAudioFileGeneratorProtocol {
                             )
 
                         } catch {
-                            print("[TextToAudioFileGenerator] cannot create output file with error \(error)")
+                            self.logger.error("Cannot create output file with error \(error.localizedDescription)")
                             continuation.resume()
                         }
                     }
                     do {
                         try output?.write(from: pcmBuffer)
                     } catch {
-                        print("[TextToAudioFileGenerator] cannot append audio to output file with error \(error)")
+                        self.logger.error("Cannot append audio to output file with error \(error.localizedDescription)")
                         continuation.resume()
                     }
                 }
