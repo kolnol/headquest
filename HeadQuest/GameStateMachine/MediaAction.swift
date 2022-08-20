@@ -7,6 +7,19 @@
 
 import Foundation
 
-protocol MediaAction {
-    var name: String { get }
+enum MediaActions: Int
+{
+	case PreviousTrack = 0
+	case Play = 1
+	case NextTrack = 2
+
+	var description: String
+	{
+		switch self
+		{
+		case .Play: return "PlayMediaActions"
+		case .PreviousTrack: return "PreviousTrackMediaActions"
+		case .NextTrack: return "NextTrackMediaActions"
+		}
+	}
 }

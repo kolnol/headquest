@@ -1,1 +1,20 @@
+# rules
 --enable blankLinesBetweenScopes
+--enable wrapArguments
+--enable wrapEnumCases
+--enable wrapMultilineStatementBraces
+--enable wrapSwitchCases
+--enable leadingDelimiters
+--enable wrapConditionalBodies
+
+# rules options
+--wraparguments before-first
+--wrapparameters before-first
+--wrapconditions before-first
+
+# formatting options
+--allman true
+--indent tab
+
+# file options
+--exclude Pods, Generated

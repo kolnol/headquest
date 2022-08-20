@@ -8,6 +8,12 @@
 import Foundation
 import OSLog
 
-class LoggingComponent {
-    // TODO: let logger = Logger(subsystem: "com.mykola.headquest.DemoView", category: String(describing: type(of: self)))
+public class LoggingComponent
+{
+	let logger: Logger
+
+	init()
+	{
+		logger = Logger(subsystem: "com.mykola.headquest.DemoView", category: String(describing: type(of: self)))
+	}
 }

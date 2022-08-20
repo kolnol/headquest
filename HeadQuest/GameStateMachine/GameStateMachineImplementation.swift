@@ -8,126 +8,84 @@
 import AVFoundation
 import Foundation
 
-class GameStateMachineImplementation {
-    var gameGraph: QuestGraphSG
-    var currentNode: QuestGraphNodeSG
-    let synthesizer: SpeechSynthesizer
-    var audioPlayer: GameAudioPlayerWithMultipleAudios?
+class GameStateMachineImplementation
+{
+	var gameGraph: QuestGraphSG
+	var currentNode: QuestGraphNodeSG
 
-    init() {
-        gameGraph = QuestGraphFixtures.SimpleQuest()
-        currentNode = gameGraph.vertexAtIndex(0)
-        synthesizer = SpeechSynthesizer()
-        // self.audioPlayer = GameAudioPlayerWithMultipleAudios()
-    }
+	init(gameGraph: QuestGraphSG)
+	{
+		self.gameGraph = gameGraph
+		currentNode = gameGraph.vertexAtIndex(0)
+	}
 
-    func reactToMediaKey(mediaAction: MediaActions) {
-        OnPreReact()
+	func updateStateByAction(mediaAction: MediaActions) throws -> QuestGraphNodeSG
+	{
+		// Find new current node
+		guard let edge = try? actionToEdge(mediaAction: mediaAction, node: currentNode, graph: gameGraph)
+		else
+		{
+			throw GameStateMachineError.noEdgeFound(message: "No edge found from node \(currentNode.name) by action \(mediaAction).")
+		}
 
-        // Find new current node
-        if let edge = actionToEdge(mediaAction: mediaAction, node: currentNode, graph: gameGraph) {
-            let nextNode = gameGraph.traverse(questNode: currentNode, action: edge)!
-            if nextNode.isSkipable {
-                synthesizer.speak(nextNode.description, OnFinish: {
-                    let e = self.actionToEdge(mediaAction: MediaActions.PreviousTrack, node: nextNode, graph: self.gameGraph)! // TODO: fix this workaround
-                    self.currentNode = self.gameGraph.traverse(questNode: nextNode, action: e)!
+		guard let newNode = gameGraph.traverse(questNode: currentNode, action: edge)
+		else
+		{
+			throw GameStateMachineError.noNodeFound(message: "No node found from node \(currentNode.name) by action \(mediaAction).")
+		}
 
-                    self.OnReactToNode()
-                    self.OnPostReact()
-                })
-            } else {
-                currentNode = nextNode
+		currentNode = newNode
+		return currentNode
+	}
 
-                OnReactToNode()
-                OnPostReact()
-            }
-        } // TODO: add action if no edges found
-    }
+	func goNext() throws -> QuestGraphNodeSG
+	{
+		if !currentNode.isSkipable
+		{
+			throw GameStateMachineError.notSkipableState(message: "Go next is not possible as it is not clear to which state to go")
+		}
 
-    func OnPreReact() {
-        audioPlayer?.stop()
-        synthesizer.stop()
-        do {
-            try AVAudioSession.sharedInstance().setActive(false)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
+		guard let edges = gameGraph.edgesForVertex(currentNode)
+		else
+		{
+			throw GameStateMachineError.noEdgeFound(message: "No edges found for the node \(currentNode.name)")
+		}
 
-    func OnPostReact() {
-        print("Post rteact")
-    }
+		if edges.count != 1
+		{
+			throw GameStateMachineError.notSkipableState(message: "Go next is not possible as it is not clear to which state to go")
+		}
 
-    func OnReactToEdge() {}
+		let edge = edges.first!
+		guard let newNode = gameGraph.traverse(questNode: currentNode, action: edge.weight)
+		else
+		{
+			throw GameStateMachineError.noNodeFound(message: "No node found from node \(currentNode.name) by action \(edge.weight.name).")
+		}
 
-    func OnReactToNode() {
-        do {
-            try playAudio(OnAudioPlayed: {
-                self.synthesizer.speak(self.currentNode.description)
-            })
-        } catch let GameAudioPlayerError.invalidFileFormat(fileName, message) {
-            print("Cannot play audio because of invalid file format in \(fileName) with message \(message)")
-        } catch {
-            print(error)
-        }
-    }
+		currentNode = newNode
+		return newNode
+	}
 
-    func playAudio(OnAudioPlayed: @escaping () -> Void) throws {
-        try audioPlayer = GameAudioPlayerWithMultipleAudios(backGroundMusicFileName: currentNode.backgroundMusicFile, soundsFileNames: [currentNode.preVoiceSound, currentNode.postVoiceSound])
+	// TODO: make it better
+	private func actionToEdge(mediaAction: MediaActions, node: QuestGraphNodeSG, graph: QuestGraphSG) throws -> QuestGraphActionEdgeSG
+	{
+		guard let edges = graph.edgesForVertex(node)
+		else
+		{
+			throw GameStateMachineError.noEdgeFound(message: "No edges found for the node \(node.name)")
+		}
 
-        if let backgroundMusicFile = currentNode.backgroundMusicFile {
-            try audioPlayer!.startBackgroundMusic(backGroundMusicFileName: backgroundMusicFile, onPlayed: {})
-        }
+		return edges[mediaAction.rawValue].weight
+	}
 
-        if let preVoiceSound = currentNode.preVoiceSound {
-            try audioPlayer!.playSound(fileName: preVoiceSound, onPlayed: {
-                OnAudioPlayed()
-            })
-        } else {
-            OnAudioPlayed()
-        }
-        // TODO: add possibility to play several audios
-    }
+	func reset()
+	{
+		currentNode = gameGraph.vertexAtIndex(0)
+	}
 
-    func startGame() {
-        OnReactToNode()
-    }
-
-    // TODO: make it better
-    private func actionToEdge(mediaAction: MediaActions, node: QuestGraphNodeSG, graph: QuestGraphSG) -> QuestGraphActionEdgeSG? {
-        if let edges = graph.edgesForVertex(node) {
-            return edges[mediaAction.rawValue].weight
-        } else {
-            print("No edges found for the node \(node.name)")
-        }
-        return nil
-    }
-
-    func reset() {
-        audioPlayer?.stop()
-        if !isEnd() {
-            synthesizer.stop()
-        }
-        gameGraph = QuestGraphFixtures.SimpleQuest()
-        currentNode = gameGraph.vertexAtIndex(0)
-    }
-
-    func isEnd() -> Bool {
-        currentNode.isEnd
-    }
-}
-
-enum MediaActions: Int {
-    case Play = 1
-    case PreviousTrack = 0
-    case NextTrack = 2
-    
-    var description : String {
-        switch self {
-        // Use Internationalization, as appropriate.
-        case .Play: return "PlayMediaActions"
-        case .PreviousTrack: return "PreviousTrackMediaActions"
-        case .NextTrack: return "NextTrackMediaActions"
-        }
-      }
+	func isEnd() -> Bool
+	{
+		currentNode.isEnd
+	}
 }

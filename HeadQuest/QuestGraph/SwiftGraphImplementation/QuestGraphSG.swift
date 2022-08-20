@@ -9,16 +9,20 @@ import Foundation
 import SwiftGraph
 
 // TODO: make it implement QuestGraph protocol
-public class QuestGraphSG: WeightedGraph<QuestGraphNodeSG, QuestGraphActionEdgeSG> {
-    func traverse(questNode: QuestGraphNodeSG, action: QuestGraphActionEdge) -> QuestGraphNodeSG? {
-        let connectedEdges = edgesForVertex(questNode)!
+public class QuestGraphSG: WeightedGraph<QuestGraphNodeSG, QuestGraphActionEdgeSG>
+{
+	func traverse(questNode: QuestGraphNodeSG, action: QuestGraphActionEdge) -> QuestGraphNodeSG?
+	{
+		let connectedEdges = edgesForVertex(questNode)!
 
-        for edge in connectedEdges {
-            if edge.u == indexOfVertex(questNode), edge.weight.name == action.name {
-                return vertexAtIndex(edge.v)
-            }
-        }
+		for edge in connectedEdges
+		{
+			if edge.u == indexOfVertex(questNode), edge.weight.name == action.name
+			{
+				return vertexAtIndex(edge.v)
+			}
+		}
 
-        return nil
-    }
+		return nil
+	}
 }

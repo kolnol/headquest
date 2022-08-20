@@ -3,16 +3,20 @@ import Combine
 import Foundation
 import UIKit
 
-var s = SpeechSynthesizerAsyncPlayGround()
+// var s = SpeechSynthesizerAsyncPlayGround()
+//
+// var t = Task
+// {
+//	var p = await s.speak("Testknfdhoansd asdhfopiu asjdhpi poashdfp oashd")
+// }
+//
+// sleep(3)
+// print("Stopping task")
+// t.cancel()
 
-var t = Task {
-    var p = await s.speak("Testknfdhoansd asdhfopiu asjdhpi poashdfp oashd")
-}
+DemoQuest().buildGraph()
 
-sleep(3)
-print("Stopping task")
-t.cancel()
-
+print(DemoQuest().buildGraph().edges)
 // testing swift concurency
 // We need something like
 // print("OnPlay clicked")

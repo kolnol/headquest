@@ -8,10 +8,13 @@
 import SwiftUI
 
 @main
-struct HeadQuestApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+struct HeadQuestApp: App
+{
+	var body: some Scene
+	{
+		WindowGroup
+		{
+			ContentView()
+		}
+	}
 }
