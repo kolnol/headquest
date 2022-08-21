@@ -20,7 +20,7 @@ struct QuestGraphFixtures
 		let edgeValidator = GraphFixtureEdgeValidator()
 		let graphValidator = GrpahFixtureValidator(nodeValidator: nodeValidator, edgeValidator: edgeValidator)
 
-		// try graphValidator.validate(graph: graph)
+		try graphValidator.validate(graph: graph)
 		return graph
 	}
 

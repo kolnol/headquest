@@ -3,5 +3,7 @@
     <pages>
         <page name='logging component tests'/>
         <page name='Untitled Page'/>
+        <page name='nullble_if_tests'/>
+        <page name='encoding_decoding_graph_nodes'/>
     </pages>
 </playground>

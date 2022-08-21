@@ -37,3 +37,38 @@ public final class GameState
 		}
 	}
 }
+
+public final class GameStateWithDictionary
+{
+    // Singleton implementation
+    public static let shared = GameStateWithDictionary()
+    private let serialQueue = DispatchQueue(label: "gameStateSerialQueue")
+    private let palyerState = PlayerState.shared
+
+    private var stateToValueMap: [String: String] = [GameStateConstants.hasTalkedToOldMan.rawValue: "false"]
+
+    private init() {}
+
+    // GameState
+    public func readState(for state: String) -> String?
+    {
+        var value: String?
+        serialQueue.sync
+        {
+            value = stateToValueMap[state]
+        }
+        return value
+    }
+
+    public func addOrUpdateState(state: String, content: String)
+    {
+        _ = serialQueue.sync
+        {
+            self.stateToValueMap.updateValue(content, forKey: state)
+        }
+    }
+}
+
+enum GameStateConstants : String, Decodable{
+    case hasTalkedToOldMan
+}

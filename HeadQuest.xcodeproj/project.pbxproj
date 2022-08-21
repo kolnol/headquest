@@ -10,13 +10,17 @@
 		681619CF2883101200E8CEF6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681619CE2883101200E8CEF6 /* AudioToolbox.framework */; };
 		681619D228835A9B00E8CEF6 /* GameStateMachineImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681619D128835A9B00E8CEF6 /* GameStateMachineImplementation.swift */; };
 		683E631D28B199D100F99AA1 /* GraphFixtureValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683E631C28B199D100F99AA1 /* GraphFixtureValidatorTests.swift */; };
+		683E632128B27D5A00F99AA1 /* FireDoorDialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683E632028B27D5A00F99AA1 /* FireDoorDialogue.swift */; };
+		683E632528B283B100F99AA1 /* old_man_campfire_background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 683E632428B283B100F99AA1 /* old_man_campfire_background.mp3 */; };
+		683E632728B2B17E00F99AA1 /* ConditionalNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683E632628B2B17E00F99AA1 /* ConditionalNode.swift */; };
+		683E632928B2C64300F99AA1 /* QuestGraphConditionalEdgeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683E632828B2C64300F99AA1 /* QuestGraphConditionalEdgeFactory.swift */; };
 		684CB130289DE4A30016416D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB12F289DE4A30016416D /* Game.swift */; };
 		684CB13228A5A3F90016416D /* TextToAudioGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13128A5A3F90016416D /* TextToAudioGenerator.swift */; };
 		684CB13428A6E9990016416D /* SpeechCacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13328A6E9990016416D /* SpeechCacher.swift */; };
 		684CB13728A70CE10016416D /* LoggingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13628A70CE10016416D /* LoggingComponent.swift */; };
 		684CB13A28A991030016416D /* GameStateMachineError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13928A991030016416D /* GameStateMachineError.swift */; };
 		684CB13C28A99EE90016416D /* QuestDialogueNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13B28A99EE90016416D /* QuestDialogueNode.swift */; };
-		684CB13E28A9A9720016416D /* SimpleGraphFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13D28A9A9720016416D /* SimpleGraphFixture.swift */; };
+		684CB13E28A9A9720016416D /* DemoQuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13D28A9A9720016416D /* DemoQuest.swift */; };
 		684CB14028A9AA3E0016416D /* QuestFixtureBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB13F28A9AA3E0016416D /* QuestFixtureBase.swift */; };
 		684CB14328AACD4D0016416D /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB14228AACD4D0016416D /* PlayerState.swift */; };
 		684CB14528AAD34C0016416D /* HealthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684CB14428AAD34C0016416D /* HealthState.swift */; };
@@ -70,13 +74,17 @@
 		681619D02883516500E8CEF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		681619D128835A9B00E8CEF6 /* GameStateMachineImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateMachineImplementation.swift; sourceTree = "<group>"; };
 		683E631C28B199D100F99AA1 /* GraphFixtureValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphFixtureValidatorTests.swift; sourceTree = "<group>"; };
+		683E632028B27D5A00F99AA1 /* FireDoorDialogue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireDoorDialogue.swift; sourceTree = "<group>"; };
+		683E632428B283B100F99AA1 /* old_man_campfire_background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = old_man_campfire_background.mp3; sourceTree = "<group>"; };
+		683E632628B2B17E00F99AA1 /* ConditionalNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalNode.swift; sourceTree = "<group>"; };
+		683E632828B2C64300F99AA1 /* QuestGraphConditionalEdgeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestGraphConditionalEdgeFactory.swift; sourceTree = "<group>"; };
 		684CB12F289DE4A30016416D /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		684CB13128A5A3F90016416D /* TextToAudioGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToAudioGenerator.swift; sourceTree = "<group>"; };
 		684CB13328A6E9990016416D /* SpeechCacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechCacher.swift; sourceTree = "<group>"; };
 		684CB13628A70CE10016416D /* LoggingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingComponent.swift; sourceTree = "<group>"; };
 		684CB13928A991030016416D /* GameStateMachineError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateMachineError.swift; sourceTree = "<group>"; };
 		684CB13B28A99EE90016416D /* QuestDialogueNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestDialogueNode.swift; sourceTree = "<group>"; };
-		684CB13D28A9A9720016416D /* SimpleGraphFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGraphFixture.swift; sourceTree = "<group>"; };
+		684CB13D28A9A9720016416D /* DemoQuest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoQuest.swift; sourceTree = "<group>"; };
 		684CB13F28A9AA3E0016416D /* QuestFixtureBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestFixtureBase.swift; sourceTree = "<group>"; };
 		684CB14228AACD4D0016416D /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 		684CB14428AAD34C0016416D /* HealthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthState.swift; sourceTree = "<group>"; };
@@ -145,6 +153,43 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		683E631E28B27C9900F99AA1 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				68A0279B28B1627300D095AC /* GraphFixtureValidator.swift */,
+			);
+			path = Validation;
+			sourceTree = "<group>";
+		};
+		683E631F28B27CB700F99AA1 /* FixtureBuilders */ = {
+			isa = PBXGroup;
+			children = (
+				684CB13F28A9AA3E0016416D /* QuestFixtureBase.swift */,
+				684CB13D28A9A9720016416D /* DemoQuest.swift */,
+				683E632028B27D5A00F99AA1 /* FireDoorDialogue.swift */,
+			);
+			path = FixtureBuilders;
+			sourceTree = "<group>";
+		};
+		683E632228B27DA800F99AA1 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				684CB13B28A99EE90016416D /* QuestDialogueNode.swift */,
+				68A25B892882FBF300884BB1 /* QuestGraphNodeSG.swift */,
+				683E632628B2B17E00F99AA1 /* ConditionalNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		683E632328B27DC000F99AA1 /* Edges */ = {
+			isa = PBXGroup;
+			children = (
+				68A25B8B2882FBF300884BB1 /* QuestGraphActionEdgeSG.swift */,
+				683E632828B2C64300F99AA1 /* QuestGraphConditionalEdgeFactory.swift */,
+			);
+			path = Edges;
+			sourceTree = "<group>";
+		};
 		684CB13528A70CCB0016416D /* Logging */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +223,7 @@
 		68A1C0552895C95A00444549 /* audio_files */ = {
 			isa = PBXGroup;
 			children = (
+				683E632428B283B100F99AA1 /* old_man_campfire_background.mp3 */,
 				68A1C05C2895FC8C00444549 /* dungeon_door_open_short.wav */,
 				68A1C05A2895F7D000444549 /* dungeon_door_open.wav */,
 				68A1C0562895C95A00444549 /* dungeon_backgraound.mp3 */,
@@ -188,10 +234,9 @@
 		68A25B7D2882FBC200884BB1 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				683E631F28B27CB700F99AA1 /* FixtureBuilders */,
+				683E631E28B27C9900F99AA1 /* Validation */,
 				68A25B7E2882FBC200884BB1 /* QuestGraphFixtures.swift */,
-				684CB13D28A9A9720016416D /* SimpleGraphFixture.swift */,
-				684CB13F28A9AA3E0016416D /* QuestFixtureBase.swift */,
-				68A0279B28B1627300D095AC /* GraphFixtureValidator.swift */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -222,10 +267,9 @@
 		68A25B882882FBF300884BB1 /* SwiftGraphImplementation */ = {
 			isa = PBXGroup;
 			children = (
-				68A25B892882FBF300884BB1 /* QuestGraphNodeSG.swift */,
+				683E632328B27DC000F99AA1 /* Edges */,
+				683E632228B27DA800F99AA1 /* Nodes */,
 				68A25B8A2882FBF300884BB1 /* QuestGraphSG.swift */,
-				68A25B8B2882FBF300884BB1 /* QuestGraphActionEdgeSG.swift */,
-				684CB13B28A99EE90016416D /* QuestDialogueNode.swift */,
 			);
 			path = SwiftGraphImplementation;
 			sourceTree = "<group>";
@@ -419,6 +463,7 @@
 			files = (
 				68C757AD2829B85200B76F9E /* Preview Assets.xcassets in Resources */,
 				68A1C05B2895F7D000444549 /* dungeon_door_open.wav in Resources */,
+				683E632528B283B100F99AA1 /* old_man_campfire_background.mp3 in Resources */,
 				68C757AA2829B85200B76F9E /* Assets.xcassets in Resources */,
 				68A1C0572895C95A00444549 /* dungeon_backgraound.mp3 in Resources */,
 				68A1C05D2895FC8C00444549 /* dungeon_door_open_short.wav in Resources */,
@@ -457,9 +502,11 @@
 				68A25B862882FBEA00884BB1 /* MediaAction.swift in Sources */,
 				68C757A82829B85000B76F9E /* DemoView.swift in Sources */,
 				68A25B922882FBF300884BB1 /* QuestGraphNode.swift in Sources */,
+				683E632728B2B17E00F99AA1 /* ConditionalNode.swift in Sources */,
 				68A25B9C288303B300884BB1 /* MediaButtonsRegistrator.swift in Sources */,
 				68A25B902882FBF300884BB1 /* QuestGraphSG.swift in Sources */,
-				684CB13E28A9A9720016416D /* SimpleGraphFixture.swift in Sources */,
+				683E632128B27D5A00F99AA1 /* FireDoorDialogue.swift in Sources */,
+				684CB13E28A9A9720016416D /* DemoQuest.swift in Sources */,
 				68A1C0592895C9BC00444549 /* GameAudioPlayer.swift in Sources */,
 				684CB13228A5A3F90016416D /* TextToAudioGenerator.swift in Sources */,
 				684CB13728A70CE10016416D /* LoggingComponent.swift in Sources */,
@@ -473,6 +520,7 @@
 				68A25B8F2882FBF300884BB1 /* QuestGraphNodeSG.swift in Sources */,
 				68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */,
 				684CB14928AAD7690016416D /* IStateProtocol.swift in Sources */,
+				683E632928B2C64300F99AA1 /* QuestGraphConditionalEdgeFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
