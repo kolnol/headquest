@@ -264,8 +264,10 @@ class FireDoorDialogue: QuestFixtureBase
 
 		edges.append(GraphEdge(from: "hasTalkedToOldManConditionalNode", to: "oldManOfferingHelp", weight: QuestGraphConditionalEdgeFactory.createConditionalNode(edgeType: ConditionalEdgeTypes.notFullfilledConditionEdge)))
 		edges.append(GraphEdge(from: "hasTalkedToOldManConditionalNode", to: "oldManWelcomesBack", weight: QuestGraphConditionalEdgeFactory.createConditionalNode(edgeType: ConditionalEdgeTypes.fullfilledConditionEdge)))
-
-		edges.append(GraphEdge(from: "oldManOfferingHelp", to: "decidingAboutHelp", weight: QuestGraphActionEdgeSG(name: "decidingAboutHelp")))
+        
+        edges.append(GraphEdge(from: "oldManWelcomesBack", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "askingQuestionsAftercomingBack")))
+        
+        edges.append(GraphEdge(from: "oldManOfferingHelp", to: "decidingAboutHelp", weight: QuestGraphActionEdgeSG(name: "decidingAboutHelp")))
 
 		edges.append(GraphEdge(from: "decidingAboutHelp", to: "fireDoorComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack")))
         edges.append(GraphEdge(from: "decidingAboutHelp", to: "acceptingHelp", weight: QuestGraphActionEdgeSG(name: "acceptHelp")))
