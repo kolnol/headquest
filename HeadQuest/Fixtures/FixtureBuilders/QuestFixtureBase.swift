@@ -123,9 +123,26 @@ class QuestFixtureBase: LoggingComponent
 		edgesToProcess.append(edge)
 	}
 
-	static func createButtonsSuggestion(onPrevAction: String, onPlayAction: String, onNextAction: String) -> String
+	static func createButtonsSuggestion(onPrevAction: String? = nil, onPlayAction: String? = nil, onNextAction: String? = nil) -> String
 	{
-		"Press previous button for \(onPrevAction). Press play button for \(onPlayAction). Press next button for \(onNextAction)."
+        if onPrevAction == nil && onPlayAction == nil && onNextAction == nil {
+            fatalError("createButtonsSuggestion was called without arguments")
+        }
+        
+        var result = ""
+        if (onPrevAction != nil){
+            result += "Press previous button for \(onPrevAction!). "
+        }
+        
+        if (onPlayAction != nil){
+            result += "Press play button for \(onPlayAction!). "
+        }
+        
+        if (onNextAction != nil){
+            result += "Press next button for \(onNextAction!). "
+        }
+        
+        return result
 	}
 
 	private static func getLongText() -> String
