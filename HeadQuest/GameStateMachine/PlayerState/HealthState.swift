@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// NOT USED YET
 public final class HealthState
 {
 	// Singleton implementation
@@ -83,4 +83,6 @@ public final class HealthState
 			isDead = newIsDead
 		}
 	}
+    
+    
 }

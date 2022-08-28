@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+// NOT USED YET
 public final class PlayerState
 {
 	// Singleton implementation
@@ -14,24 +16,15 @@ public final class PlayerState
 	private let serialQueue = DispatchQueue(label: "playerStateSerialQueue")
 
 	// Health
-	public let healthState: HealthState = .shared
+	public let healthState: HealthState = HealthState.shared
 
 	private init() {}
-}
-
-public final class PlayerStateWithInstances
-{
-	// Singleton implementation
-	public static let shared = PlayerStateWithInstances()
-	private let serialQueue = DispatchQueue(label: "playerStateSerialQueue")
-
-	// Health
-	private var healthState = HealthState.shared
-
-	// GameState
-	private var gameState = GameState.shared
-
-	private init() {}
+    
+//    public func reset() {
+//        serialQueue.sync {
+//            //healthState.reset()
+//        }
+//    }
 }
 
 public enum PlayerStateError: Error

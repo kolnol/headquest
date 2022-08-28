@@ -145,9 +145,16 @@ class Game: LoggingComponent
 		}
 
 		logger.log(level: .debug, "Starting speaking for node \(node.name)")
-		try await audioPlayer!.playSpeech(speechFileName: SpeechCacher.nodeNameToSpeechFileName(nodeName: node.name))
-		// await synthesizer.speak(node.description)
-		logger.log(level: .debug, "Done speaking for node \(node.name)")
+		
+        let speechFileName = SpeechCacher.nodeNameToSpeechFileName(nodeName: node.name)
+        
+        if SpeechCacher.fileExists(fileName: speechFileName) {
+            try await audioPlayer!.playSpeech(speechFileName: speechFileName)
+        } else {
+            logger.warning("No audio was found for node \(node.name)")
+        }
+
+        logger.log(level: .debug, "Done speaking for node \(node.name)")
 
 		if Task.isCancelled
 		{
@@ -180,6 +187,8 @@ class Game: LoggingComponent
 		}
 
 		gameStateMachine.reset()
+        
+        GameStateWithDictionary.shared.reset()
 	}
 
 	func isEnd() -> Bool

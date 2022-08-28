@@ -2,7 +2,17 @@
 
 import Foundation
 
+let hs = HealthState.shared
 
-var node = QuestGraphNodeSG(name: "test", description:"test description")
+print(hs.readHp())
+print(HealthState.shared.readHp())
 
-print()
+HealthState.shared.takeDamage(amount: 1)
+
+print(hs.readHp())
+print(HealthState.shared.readHp())
+
+hs.takeDamage(amount: 1)
+
+print(hs.readHp())
+print(HealthState.shared.readHp())

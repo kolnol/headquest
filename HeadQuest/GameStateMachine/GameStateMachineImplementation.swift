@@ -16,9 +16,9 @@ class GameStateMachineImplementation
 	init(gameGraph: QuestGraphSG)
 	{
 		self.gameGraph = gameGraph
-		currentNode = gameGraph.vertexAtIndex(0)
+        currentNode = gameGraph.getRootNode()
 	}
-
+    
 	func updateStateByAction(mediaAction: MediaActions) throws -> QuestGraphNodeSG
 	{
 		// Find new current node
@@ -81,7 +81,7 @@ class GameStateMachineImplementation
 
 	func reset()
 	{
-		currentNode = gameGraph.vertexAtIndex(0)
+        currentNode = gameGraph.getRootNode()
 	}
 
 	func isEnd() -> Bool

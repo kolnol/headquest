@@ -15,6 +15,7 @@ class DemoQuest: QuestFixtureBase
 		let startV = QuestGraphNodeSG(
 			name: "Start",
 			description: "Welcome to the demo of the Head Quest. You are in the dungeon. In front of you, you have three doors: one with skeleton, one with fire and one with key on it. Which one do you choose?. " + DemoQuest.createButtonsSuggestion(onPrevAction: "skeleton door", onPlayAction: "Fire Door", onNextAction: "Key Door"),
+            isStart: true,
 			backgroundMusicFile: "dungeon_backgraound.mp3",
 			preVoiceSound: "dungeon_door_open.wav"
 		)

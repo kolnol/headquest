@@ -7,17 +7,19 @@
 
 import Foundation
 
-class QuestGraphConditionalEdgeFactory {
-    
-    static let fullfilledEdgeName: String = "yes"
-    static let notFullfilledEdgeName:String = "no"
-    
-        public static func createConditionalNode(edgeType: ConditionalEdgeTypes) -> QuestGraphActionEdgeSG {
-        switch edgeType {
-        case .fullfilledConditionEdge:
-            return QuestGraphActionEdgeSG(name: fullfilledEdgeName)
-        case .notFullfilledConditionEdge:
-            return QuestGraphActionEdgeSG(name: notFullfilledEdgeName)
-        }
-    }
+public class QuestGraphConditionalEdgeFactory
+{
+	public static let fullfilledEdgeName: String = "yes"
+	public static let notFullfilledEdgeName: String = "no"
+
+	public static func createConditionalNode(edgeType: ConditionalEdgeTypes) -> QuestGraphActionEdgeSG
+	{
+		switch edgeType
+		{
+		case .fullfilledConditionEdge:
+			return QuestGraphActionEdgeSG(name: fullfilledEdgeName)
+		case .notFullfilledConditionEdge:
+			return QuestGraphActionEdgeSG(name: notFullfilledEdgeName)
+		}
+	}
 }

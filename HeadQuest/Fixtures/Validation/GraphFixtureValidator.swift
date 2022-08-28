@@ -30,25 +30,30 @@ class GrpahFixtureValidator: LoggingComponent
 
 		// no duplicated nodes
 		try checkDuplicatedNodes(graph: graph)
+        
+        // no duplicated nodes
+        try checkDuplicatedRootNodes(graph: graph)
 
 		// no duplicate edges
 		try checkDuplicatedEdges(graph: graph)
-        
-        // every edge is connected to two nodes
-        try checkEdgesAreConnectedToNodes(graph: graph)
-        
+
+		// every edge is connected to two nodes
+		try checkEdgesAreConnectedToNodes(graph: graph)
+
 		// no edges of the same action from one origin
 		try checkUniqueActionPossibilities(graph: graph)
-        
-        // every graph has to have at least one end node
-        try checkHasEnd(graph: graph)
-        
+
+		// every graph has to have at least one end node
+		try checkHasEnd(graph: graph)
+
 		// check if node has no out edges then it is the end and vice versa
 		try validateEndNodes(graph: graph)
 
-        //Conditional nodes must have exactly two out edges with actions "yes", "no"
-        // TODO
+		// Conditional nodes must have exactly two out edges with actions "yes", "no"
+		// TODO:
         
+        try validateConditionalNodes(graph: graph)
+
 		// every path has an end (can be problematic with cycles)
 		try validateEveryPathHasEnd(graph: graph)
 
@@ -79,6 +84,21 @@ class GrpahFixtureValidator: LoggingComponent
 			throw GraphFixtureValidationError.duplicatedNodes(message: "Following nodes are duplicated \(duplicatedNodes.map(\.name))")
 		}
 	}
+    
+    private func checkDuplicatedRootNodes(graph: QuestGraphSG) throws
+    {
+        let rootNodes = graph.vertices.filter { node in
+            node.isStart
+        }
+        
+        if rootNodes.isEmpty {
+            throw GraphFixtureValidationError.rootNodeError(message: "No root node found.")
+        }
+        
+        if rootNodes.count > 1 {
+            throw GraphFixtureValidationError.rootNodeError(message: "Found more than 1 root nodes.")
+        }
+    }
 
 	private func checkDuplicatedEdges(graph: QuestGraphSG) throws
 	{
@@ -114,33 +134,70 @@ class GrpahFixtureValidator: LoggingComponent
 			}
 		}
 	}
-    
-    private func checkEdgesAreConnectedToNodes(graph: QuestGraphSG) throws {
-        for edge in getGraphEdges(graph: graph) {
-            let originNode = graph.vertexAtIndex(edge.u)
-            
-            if originNode == nil {
-                throw GraphFixtureValidationError.orphanEdge(message: "Found edge without origin node \(edge)")
-            }
-            
-            let targetNode = graph.vertexAtIndex(edge.v)
-            
-            if targetNode == nil {
-                throw GraphFixtureValidationError.orphanEdge(message: "Found edge without target node \(edge)")
-            }
-        }
-    }
-    
-    private func checkHasEnd(graph: QuestGraphSG) throws {
-        let endNodes = graph.vertices.filter { node in
-            node.isEnd
+
+	private func checkEdgesAreConnectedToNodes(graph: QuestGraphSG) throws
+	{
+		for edge in getGraphEdges(graph: graph)
+		{
+			let originNode = graph.vertexAtIndex(edge.u)
+
+			if originNode == nil
+			{
+				throw GraphFixtureValidationError.orphanEdge(message: "Found edge without origin node \(edge)")
+			}
+
+			let targetNode = graph.vertexAtIndex(edge.v)
+
+			if targetNode == nil
+			{
+				throw GraphFixtureValidationError.orphanEdge(message: "Found edge without target node \(edge)")
+			}
+		}
+	}
+
+	private func checkHasEnd(graph: QuestGraphSG) throws
+	{
+		let endNodes = graph.vertices.filter
+		{ node in
+			node.isEnd
+		}
+
+		if endNodes.isEmpty
+		{
+			throw GraphFixtureValidationError.noEndNodes(message: "The graph does not have end nodes")
+		}
+	}
+
+    private func validateConditionalNodes(graph: QuestGraphSG) throws {
+        let conditionalNodes = graph.vertices.filter { node in
+            type(of: node) == ConditionalNode.self
         }
         
-        if endNodes.isEmpty {
-            throw GraphFixtureValidationError.noEndNodes(message: "The graph does not have end nodes")
+        for node in conditionalNodes {
+            guard let outEdges = graph.edgesForVertex(node)?.filter({ edge in
+                edge.u == graph.indexOfVertex(node)
+            }) else{
+                throw GraphFixtureValidationError.conditionalNodeError(message: "No out edges found for conditional node \(node.name)")
+            }
+            
+            if outEdges.count != 2
+            {
+                throw GraphFixtureValidationError.conditionalNodeError(message: "unexpected number of edges from conditional node \(node.name). Expected 2 received \(outEdges.count)")
+            }
+            
+            let edgesNamesSet = Set(outEdges.map { edge in
+                edge.weight.name
+            })
+            
+            let expectedEdgesNamesSet = Set([QuestGraphConditionalEdgeFactory.notFullfilledEdgeName, QuestGraphConditionalEdgeFactory.fullfilledEdgeName])
+            
+            if edgesNamesSet != expectedEdgesNamesSet
+            {
+                throw GraphFixtureValidationError.conditionalNodeError(message: "Invlaid edges names for conditional node \(node.name). Expected \(expectedEdgesNamesSet) received \(edgesNamesSet)")
+            }
         }
     }
-
+    
 	private func validateEndNodes(graph: QuestGraphSG) throws
 	{
 		for node in graph.vertices
@@ -259,8 +316,7 @@ class GraphFixtureNodeValidator
 class GraphFixtureEdgeValidator
 {
 	func validate(edge _: WeightedEdge<QuestGraphActionEdgeSG>) throws
-	{
-    }
+	{}
 }
 
 enum GraphFixtureValidationError
@@ -268,11 +324,13 @@ enum GraphFixtureValidationError
 	case duplicatedNodes(message: String?)
 	case duplicatedEdges(message: String?)
 	case nonUniqueAction(message: String?)
-    case noEndNodes(message:String?)
+	case noEndNodes(message: String?)
 	case endNodeVialation(message: String?)
 	case noPathToTheEndFound(message: String?)
-    case orphanEdge(message:String?)
-    case orphanNode(message:String?)
+	case orphanEdge(message: String?)
+	case orphanNode(message: String?)
+    case conditionalNodeError(message: String?)
+    case rootNodeError(message: String?)
 }
 
 extension GraphFixtureValidationError: LocalizedError
@@ -285,10 +343,12 @@ extension GraphFixtureValidationError: LocalizedError
 			let .duplicatedNodes(message),
 			let .nonUniqueAction(message),
 			let .endNodeVialation(message),
-            let .orphanEdge(message),
-            let .orphanNode(message),
-            let .noEndNodes(message),
+			let .orphanEdge(message),
+			let .orphanNode(message),
+			let .noEndNodes(message),
 			let .noPathToTheEndFound(message),
+            let .conditionalNodeError(message),
+            let .rootNodeError(message),
 			let .duplicatedEdges(message):
 			return message
 		}

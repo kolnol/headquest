@@ -25,4 +25,10 @@ public class QuestGraphSG: WeightedGraph<QuestGraphNodeSG, QuestGraphActionEdgeS
 
 		return nil
 	}
+    
+    func getRootNode() -> QuestGraphNodeSG {
+        return vertices.first { node in
+            node.isStart
+        }!
+    }
 }

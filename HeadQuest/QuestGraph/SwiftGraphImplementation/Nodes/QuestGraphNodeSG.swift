@@ -9,11 +9,12 @@ import Foundation
 
 public class QuestGraphNodeSG: QuestGraphNode, Decodable, Encodable, Equatable, Hashable
 {
-	init(name: String, description: String, isEnd: Bool = false, backgroundMusicFile: String? = nil, preVoiceSound: String? = nil, postVoiceSound: String? = nil, isSkipable: Bool = false)
+    init(name: String, description: String?, isEnd: Bool = false, isStart:Bool = false,  backgroundMusicFile: String? = nil, preVoiceSound: String? = nil, postVoiceSound: String? = nil, isSkipable: Bool = false)
 	{
 		self.name = name
-		self.description = description
+        self.description = description
 		self.isEnd = isEnd
+        self.isStart = isStart
 		self.backgroundMusicFile = backgroundMusicFile
 		self.preVoiceSound = preVoiceSound
 		self.postVoiceSound = postVoiceSound
@@ -22,9 +23,10 @@ public class QuestGraphNodeSG: QuestGraphNode, Decodable, Encodable, Equatable, 
 
 	var name: String
 
-	var description: String
+	var description: String?
 
 	var isEnd: Bool
+    var isStart:Bool
 
 	// Defines if statemichine has to go to the next node automatically
 	var isSkipable: Bool
@@ -34,12 +36,13 @@ public class QuestGraphNodeSG: QuestGraphNode, Decodable, Encodable, Equatable, 
 	var preVoiceSound: String?
 	var postVoiceSound: String?
 
-	init(name: String, description: String, isEnd: Bool = false, isSkipable: Bool = false)
+    init(name: String, description: String, isEnd: Bool = false, isStart:Bool = false, isSkipable: Bool = false)
 	{
 		self.name = name
 		self.description = description
 		self.isEnd = isEnd
 		self.isSkipable = isSkipable
+        self.isStart = isStart
 	}
 
 	public static func == (lhs: QuestGraphNodeSG, rhs: QuestGraphNodeSG) -> Bool
