@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MediaActions: Int
+enum MediaActions: Int, Decodable
 {
 	case PreviousTrack = 0
 	case Play = 1

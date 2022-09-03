@@ -63,20 +63,20 @@ class DemoQuest: QuestFixtureBase
 	{
 		var edges = [GraphEdge]()
 
-		edges.append(GraphEdge(from: "startV", to: "skeletonFightV", weight: QuestGraphActionEdgeSG(name: "Skeleton Door")))
+        edges.append(GraphEdge(from: "startV", to: "skeletonFightV", weight: QuestGraphActionEdgeSG(name: "Skeleton Door", action: MediaActions.PreviousTrack)))
 
-		edges.append(GraphEdge(from: "startV", to: "fireDoorV", weight: QuestGraphActionEdgeSG(name: "open_fire_door")))
-		edges.append(GraphEdge(from: "startV", to: "keyDoorV", weight: QuestGraphActionEdgeSG(name: "open_key_door")))
+        edges.append(GraphEdge(from: "startV", to: "fireDoorV", weight: QuestGraphActionEdgeSG(name: "open_fire_door", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "startV", to: "keyDoorV", weight: QuestGraphActionEdgeSG(name: "open_key_door", action: MediaActions.NextTrack)))
 
-		edges.append(GraphEdge(from: "skeletonFightV", to: "sneakingV", weight: QuestGraphActionEdgeSG(name: "sneak")))
-		edges.append(GraphEdge(from: "skeletonFightV", to: "comeBackV", weight: QuestGraphActionEdgeSG(name: "come_back")))
-		edges.append(GraphEdge(from: "skeletonFightV", to: "attackV", weight: QuestGraphActionEdgeSG(name: "attack")))
+        edges.append(GraphEdge(from: "skeletonFightV", to: "sneakingV", weight: QuestGraphActionEdgeSG(name: "sneak", action: MediaActions.PreviousTrack)))
+        edges.append(GraphEdge(from: "skeletonFightV", to: "comeBackV", weight: QuestGraphActionEdgeSG(name: "come_back", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "skeletonFightV", to: "attackV", weight: QuestGraphActionEdgeSG(name: "attack", action: MediaActions.NextTrack)))
 
-		edges.append(GraphEdge(from: "fireDoorV", to: "attackV", weight: QuestGraphActionEdgeSG(name: "attack")))
+        edges.append(GraphEdge(from: "fireDoorV", to: "attackV", weight: QuestGraphActionEdgeSG(name: "attack", action: MediaActions.PreviousTrack)))
 
-		edges.append(GraphEdge(from: "fireDoorV", to: "comeBackV", weight: QuestGraphActionEdgeSG(name: "come_back")))
+        edges.append(GraphEdge(from: "fireDoorV", to: "comeBackV", weight: QuestGraphActionEdgeSG(name: "come_back", action: MediaActions.NextTrack)))
 
-		edges.append(GraphEdge(from: "comeBackV", to: "startV", weight: QuestGraphActionEdgeSG(name: "come_back")))
+        edges.append(GraphEdge(from: "comeBackV", to: "startV", weight: QuestGraphActionEdgeSG(name: "come_back", action: MediaActions.Play)))
 
 		return edges
 	}

@@ -17,9 +17,9 @@ public class QuestGraphConditionalEdgeFactory
 		switch edgeType
 		{
 		case .fullfilledConditionEdge:
-			return QuestGraphActionEdgeSG(name: fullfilledEdgeName)
+            return QuestGraphActionEdgeSG(name: fullfilledEdgeName, action: MediaActions.Play)
 		case .notFullfilledConditionEdge:
-			return QuestGraphActionEdgeSG(name: notFullfilledEdgeName)
+            return QuestGraphActionEdgeSG(name: notFullfilledEdgeName, action: MediaActions.Play)
 		}
 	}
 }

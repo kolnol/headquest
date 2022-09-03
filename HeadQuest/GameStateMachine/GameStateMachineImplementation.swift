@@ -75,8 +75,12 @@ class GameStateMachineImplementation
 		{
 			throw GameStateMachineError.noEdgeFound(message: "No edges found for the node \(node.name)")
 		}
-
-		return edges[mediaAction.rawValue].weight
+        
+        let edge = edges.first { edge in
+            edge.weight.action == mediaAction
+        }
+        
+        return edge!.weight
 	}
 
 	func reset()

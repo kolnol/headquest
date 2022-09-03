@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class FireDoorDialogue: QuestFixtureBase
 {
@@ -260,77 +261,77 @@ class FireDoorDialogue: QuestFixtureBase
 	override func buildEdges() -> [GraphEdge]
 	{
 		var edges = [GraphEdge]()
-		edges.append(GraphEdge(from: "fireDoorV", to: "hasTalkedToOldManConditionalNode", weight: QuestGraphActionEdgeSG(name: "talk")))
+        edges.append(GraphEdge(from: "fireDoorV", to: "hasTalkedToOldManConditionalNode", weight: QuestGraphActionEdgeSG(name: "talk", action: MediaActions.Play)))
 
 		edges.append(GraphEdge(from: "hasTalkedToOldManConditionalNode", to: "oldManOfferingHelp", weight: QuestGraphConditionalEdgeFactory.createConditionalNode(edgeType: ConditionalEdgeTypes.notFullfilledConditionEdge)))
 		edges.append(GraphEdge(from: "hasTalkedToOldManConditionalNode", to: "oldManWelcomesBack", weight: QuestGraphConditionalEdgeFactory.createConditionalNode(edgeType: ConditionalEdgeTypes.fullfilledConditionEdge)))
         
-        edges.append(GraphEdge(from: "oldManWelcomesBack", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "askingQuestionsAftercomingBack")))
+        edges.append(GraphEdge(from: "oldManWelcomesBack", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "askingQuestionsAftercomingBack", action: MediaActions.Play)))
         
-        edges.append(GraphEdge(from: "oldManOfferingHelp", to: "decidingAboutHelp", weight: QuestGraphActionEdgeSG(name: "decidingAboutHelp")))
+        edges.append(GraphEdge(from: "oldManOfferingHelp", to: "decidingAboutHelp", weight: QuestGraphActionEdgeSG(name: "decidingAboutHelp", action: MediaActions.Play)))
 
-		edges.append(GraphEdge(from: "decidingAboutHelp", to: "fireDoorComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack")))
-        edges.append(GraphEdge(from: "decidingAboutHelp", to: "acceptingHelp", weight: QuestGraphActionEdgeSG(name: "acceptHelp")))
+        edges.append(GraphEdge(from: "decidingAboutHelp", to: "fireDoorComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "decidingAboutHelp", to: "acceptingHelp", weight: QuestGraphActionEdgeSG(name: "acceptHelp", action: MediaActions.PreviousTrack)))
 
-        edges.append(GraphEdge(from: "fireDoorComingBack", to: "attackV", weight: QuestGraphActionEdgeSG(name: "attack")))
-        edges.append(GraphEdge(from: "fireDoorComingBack", to: "comeBackV", weight: QuestGraphActionEdgeSG(name: "come_back")))
-        edges.append(GraphEdge(from: "fireDoorComingBack", to: "hasTalkedToOldManConditionalNode", weight: QuestGraphActionEdgeSG(name: "talk")))
+        edges.append(GraphEdge(from: "fireDoorComingBack", to: "attackV", weight: QuestGraphActionEdgeSG(name: "attack", action: MediaActions.PreviousTrack)))
+        edges.append(GraphEdge(from: "fireDoorComingBack", to: "comeBackV", weight: QuestGraphActionEdgeSG(name: "come_back", action: MediaActions.NextTrack)))
+        edges.append(GraphEdge(from: "fireDoorComingBack", to: "hasTalkedToOldManConditionalNode", weight: QuestGraphActionEdgeSG(name: "talk", action: MediaActions.Play)))
         
-        edges.append(GraphEdge(from: "acceptingHelp", to: "oldManOffersTea", weight: QuestGraphActionEdgeSG(name: "acceptHelp")))
+        edges.append(GraphEdge(from: "acceptingHelp", to: "oldManOffersTea", weight: QuestGraphActionEdgeSG(name: "acceptHelp", action: MediaActions.Play)))
         
-        edges.append(GraphEdge(from: "oldManOffersTea", to: "oldManOffersTeaDialogue", weight: QuestGraphActionEdgeSG(name: "oldManAskedIfYouWantTea")))
-        edges.append(GraphEdge(from: "oldManOffersTeaDialogue", to: "decideIfToDrinkTea", weight: QuestGraphActionEdgeSG(name: "decideIfToDrinkTea")))
+        edges.append(GraphEdge(from: "oldManOffersTea", to: "oldManOffersTeaDialogue", weight: QuestGraphActionEdgeSG(name: "oldManAskedIfYouWantTea", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "oldManOffersTeaDialogue", to: "decideIfToDrinkTea", weight: QuestGraphActionEdgeSG(name: "decideIfToDrinkTea", action: MediaActions.Play)))
         
-        edges.append(GraphEdge(from: "decideIfToDrinkTea", to: "drinkingTea", weight: QuestGraphActionEdgeSG(name: "acceptingTea")))
-        edges.append(GraphEdge(from: "decideIfToDrinkTea", to: "decliningTea", weight: QuestGraphActionEdgeSG(name: "declineTea")))
-        edges.append(GraphEdge(from: "decideIfToDrinkTea", to: "fireDoorComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack")))
+        edges.append(GraphEdge(from: "decideIfToDrinkTea", to: "drinkingTea", weight: QuestGraphActionEdgeSG(name: "acceptingTea", action: MediaActions.PreviousTrack)))
+        edges.append(GraphEdge(from: "decideIfToDrinkTea", to: "decliningTea", weight: QuestGraphActionEdgeSG(name: "declineTea", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "decideIfToDrinkTea", to: "fireDoorComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack", action: MediaActions.NextTrack)))
         
-        edges.append(GraphEdge(from: "decliningTea", to: "notOnlyForTeaHere", weight: QuestGraphActionEdgeSG(name: "oldManReacts")))
+        edges.append(GraphEdge(from: "decliningTea", to: "notOnlyForTeaHere", weight: QuestGraphActionEdgeSG(name: "oldManReacts", action: MediaActions.Play)))
 
-        edges.append(GraphEdge(from: "drinkingTea", to: "tellingTeaIsBad", weight: QuestGraphActionEdgeSG(name: "tellingTeaIsBad")))
-        edges.append(GraphEdge(from: "drinkingTea", to: "ignoringTea", weight: QuestGraphActionEdgeSG(name: "ignoreTea")))
-        edges.append(GraphEdge(from: "drinkingTea", to: "complimetingTea", weight: QuestGraphActionEdgeSG(name: "complementTea")))
+        edges.append(GraphEdge(from: "drinkingTea", to: "tellingTeaIsBad", weight: QuestGraphActionEdgeSG(name: "tellingTeaIsBad", action: MediaActions.PreviousTrack)))
+        edges.append(GraphEdge(from: "drinkingTea", to: "ignoringTea", weight: QuestGraphActionEdgeSG(name: "ignoreTea", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "drinkingTea", to: "complimetingTea", weight: QuestGraphActionEdgeSG(name: "complementTea", action: MediaActions.NextTrack)))
 
         
-        edges.append(GraphEdge(from: "tellingTeaIsBad", to: "notOnlyForTeaHere", weight: QuestGraphActionEdgeSG(name: "tellingTeaIsbadToNotonlyForTeaHere")))
-        edges.append(GraphEdge(from: "ignoringTea", to: "notOnlyForTeaHere", weight: QuestGraphActionEdgeSG(name: "complementTeaToNotOnlyForTeaHere")))
-        edges.append(GraphEdge(from: "complimetingTea", to: "oldManTellsAboutUncle", weight: QuestGraphActionEdgeSG(name: "complimetingTeaTooldManTellsAboutUncle")))
-        edges.append(GraphEdge(from: "oldManTellsAboutUncle", to: "notOnlyForTeaHere", weight: QuestGraphActionEdgeSG(name: "complimetingTeaTooldManTellsAboutUncle")))
+        edges.append(GraphEdge(from: "tellingTeaIsBad", to: "notOnlyForTeaHere", weight: QuestGraphActionEdgeSG(name: "tellingTeaIsbadToNotonlyForTeaHere", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "ignoringTea", to: "notOnlyForTeaHere", weight: QuestGraphActionEdgeSG(name: "complementTeaToNotOnlyForTeaHere", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "complimetingTea", to: "oldManTellsAboutUncle", weight: QuestGraphActionEdgeSG(name: "complimetingTeaTooldManTellsAboutUncle", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "oldManTellsAboutUncle", to: "notOnlyForTeaHere", weight: QuestGraphActionEdgeSG(name: "complimetingTeaTooldManTellsAboutUncle", action: MediaActions.Play)))
 
-        edges.append(GraphEdge(from: "notOnlyForTeaHere", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "askForInformation")))
+        edges.append(GraphEdge(from: "notOnlyForTeaHere", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "askForInformation", action: MediaActions.Play)))
         
         // TODO the problem here will be that i expect all edges to be in the right order prev, play, next
         // TODO how to fix it?
         // Carousel of dialogues
-        edges.append(GraphEdge(from: "askingForInformation1", to: "askingForInformation2", weight: QuestGraphActionEdgeSG(name: "next")))
-        edges.append(GraphEdge(from: "askingForInformation2", to: "askingForInformation3", weight: QuestGraphActionEdgeSG(name: "next")))
-        edges.append(GraphEdge(from: "askingForInformation3", to: "askingForInformation4", weight: QuestGraphActionEdgeSG(name: "next")))
-        edges.append(GraphEdge(from: "askingForInformation4", to: "askingForInformation5", weight: QuestGraphActionEdgeSG(name: "next")))
-        edges.append(GraphEdge(from: "askingForInformation5", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "next")))
+        edges.append(GraphEdge(from: "askingForInformation1", to: "askingForInformation2", weight: QuestGraphActionEdgeSG(name: "next", action: MediaActions.NextTrack)))
+        edges.append(GraphEdge(from: "askingForInformation2", to: "askingForInformation3", weight: QuestGraphActionEdgeSG(name: "next", action: MediaActions.NextTrack)))
+        edges.append(GraphEdge(from: "askingForInformation3", to: "askingForInformation4", weight: QuestGraphActionEdgeSG(name: "next", action: MediaActions.NextTrack)))
+        edges.append(GraphEdge(from: "askingForInformation4", to: "askingForInformation5", weight: QuestGraphActionEdgeSG(name: "next", action: MediaActions.NextTrack)))
+        edges.append(GraphEdge(from: "askingForInformation5", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "next", action: MediaActions.NextTrack)))
 
-        edges.append(GraphEdge(from: "askingForInformation5", to: "askingForInformation4", weight: QuestGraphActionEdgeSG(name: "prev")))
-        edges.append(GraphEdge(from: "askingForInformation4", to: "askingForInformation3", weight: QuestGraphActionEdgeSG(name: "prev")))
-        edges.append(GraphEdge(from: "askingForInformation3", to: "askingForInformation2", weight: QuestGraphActionEdgeSG(name: "prev")))
-        edges.append(GraphEdge(from: "askingForInformation2", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "prev")))
-        edges.append(GraphEdge(from: "askingForInformation1", to: "askingForInformation5", weight: QuestGraphActionEdgeSG(name: "prev")))
+        edges.append(GraphEdge(from: "askingForInformation5", to: "askingForInformation4", weight: QuestGraphActionEdgeSG(name: "prev", action: MediaActions.PreviousTrack)))
+        edges.append(GraphEdge(from: "askingForInformation4", to: "askingForInformation3", weight: QuestGraphActionEdgeSG(name: "prev", action: MediaActions.PreviousTrack)))
+        edges.append(GraphEdge(from: "askingForInformation3", to: "askingForInformation2", weight: QuestGraphActionEdgeSG(name: "prev", action: MediaActions.PreviousTrack)))
+        edges.append(GraphEdge(from: "askingForInformation2", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "prev", action: MediaActions.PreviousTrack)))
+        edges.append(GraphEdge(from: "askingForInformation1", to: "askingForInformation5", weight: QuestGraphActionEdgeSG(name: "prev", action: MediaActions.PreviousTrack)))
 
         
-        edges.append(GraphEdge(from: "askingForInformation1", to: "oldManIntroducesHimself", weight: QuestGraphActionEdgeSG(name: "play")))
-        edges.append(GraphEdge(from: "oldManIntroducesHimself", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "answered")))
+        edges.append(GraphEdge(from: "askingForInformation1", to: "oldManIntroducesHimself", weight: QuestGraphActionEdgeSG(name: "play", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "oldManIntroducesHimself", to: "askingForInformation1", weight: QuestGraphActionEdgeSG(name: "answered", action: MediaActions.Play)))
 
-        edges.append(GraphEdge(from: "askingForInformation2", to: "oldManTellsWhereYouAre", weight: QuestGraphActionEdgeSG(name: "play")))
-        edges.append(GraphEdge(from: "oldManTellsWhereYouAre", to: "askingForInformation2", weight: QuestGraphActionEdgeSG(name: "answered")))
+        edges.append(GraphEdge(from: "askingForInformation2", to: "oldManTellsWhereYouAre", weight: QuestGraphActionEdgeSG(name: "play", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "oldManTellsWhereYouAre", to: "askingForInformation2", weight: QuestGraphActionEdgeSG(name: "answered", action: MediaActions.Play)))
 
-        edges.append(GraphEdge(from: "askingForInformation3", to: "oldManTellsYouAboutExit", weight: QuestGraphActionEdgeSG(name: "play")))
-        edges.append(GraphEdge(from: "oldManTellsYouAboutExit", to: "exitTheDungeonQuestion", weight: QuestGraphActionEdgeSG(name: "answered")))
-        edges.append(GraphEdge(from: "exitTheDungeonQuestion", to: "teaV", weight: QuestGraphActionEdgeSG(name: "follow")))
-        edges.append(GraphEdge(from: "exitTheDungeonQuestion", to: "askingForInformation3", weight: QuestGraphActionEdgeSG(name: "notFollow")))
+        edges.append(GraphEdge(from: "askingForInformation3", to: "oldManTellsYouAboutExit", weight: QuestGraphActionEdgeSG(name: "play", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "oldManTellsYouAboutExit", to: "exitTheDungeonQuestion", weight: QuestGraphActionEdgeSG(name: "answered", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "exitTheDungeonQuestion", to: "teaV", weight: QuestGraphActionEdgeSG(name: "follow", action: MediaActions.PreviousTrack)))
+        edges.append(GraphEdge(from: "exitTheDungeonQuestion", to: "askingForInformation3", weight: QuestGraphActionEdgeSG(name: "notFollow", action: MediaActions.Play)))
         
-        edges.append(GraphEdge(from: "askingForInformation4", to: "decideIfToDrinkTea", weight: QuestGraphActionEdgeSG(name: "play")))
+        edges.append(GraphEdge(from: "askingForInformation4", to: "decideIfToDrinkTea", weight: QuestGraphActionEdgeSG(name: "play", action: MediaActions.Play)))
         
-        edges.append(GraphEdge(from: "askingForInformation5", to: "thankingAndComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack")))
-        edges.append(GraphEdge(from: "thankingAndComingBack", to: "itIsAPleasureOldMan", weight: QuestGraphActionEdgeSG(name: "saidThanksAndComingBack")))
-        edges.append(GraphEdge(from: "itIsAPleasureOldMan", to: "fireDoorComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack")))
+        edges.append(GraphEdge(from: "askingForInformation5", to: "thankingAndComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack", action: MediaActions.NextTrack)))
+        edges.append(GraphEdge(from: "thankingAndComingBack", to: "itIsAPleasureOldMan", weight: QuestGraphActionEdgeSG(name: "saidThanksAndComingBack", action: MediaActions.Play)))
+        edges.append(GraphEdge(from: "itIsAPleasureOldMan", to: "fireDoorComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack", action: MediaActions.Play)))
         
         return edges
 	}

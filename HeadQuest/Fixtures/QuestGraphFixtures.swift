@@ -54,8 +54,8 @@ struct QuestGraphFixtures
 				nextNodeAfterSkip,
 			])
 
-		questGraph.addEdge(from: skipableStartingNode, to: secondSkip, weight: QuestGraphActionEdgeSG(name: "Skip action"), directed: true)
-		questGraph.addEdge(from: secondSkip, to: nextNodeAfterSkip, weight: QuestGraphActionEdgeSG(name: "Skip action"), directed: true)
+        questGraph.addEdge(from: skipableStartingNode, to: secondSkip, weight: QuestGraphActionEdgeSG(name: "Skip action", action: MediaActions.Play), directed: true)
+        questGraph.addEdge(from: secondSkip, to: nextNodeAfterSkip, weight: QuestGraphActionEdgeSG(name: "Skip action", action: MediaActions.Play), directed: true)
 
 		return questGraph
 	}
