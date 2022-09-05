@@ -45,6 +45,13 @@ class GameStateMachineImplementation
 			throw GameStateMachineError.notSkipableState(message: "Go next is not possible as it is not clear to which state to go")
 		}
 
+        if let condNode = currentNode as? ConditionalNode {
+            
+            let newNode = try goNextConditionalNode(condNode: condNode)
+            currentNode = newNode
+            return newNode
+        }
+        
 		guard let edges = gameGraph.edgesForVertex(currentNode)
 		else
 		{
@@ -66,8 +73,26 @@ class GameStateMachineImplementation
 		currentNode = newNode
 		return newNode
 	}
-
-	// TODO: make it better
+    
+    // TODO make it to strategy pattern
+    private func goNextConditionalNode(condNode: ConditionalNode) throws -> QuestGraphNodeSG {
+        guard let edges = gameGraph.edgesForVertex(currentNode)
+        else
+        {
+            throw GameStateMachineError.noEdgeFound(message: "No edges found for the node \(currentNode.name)")
+        }
+        let edge = edges.first { edge in
+                edge.weight.name == (condNode.evaluateCondition() ? QuestGraphConditionalEdgeFactory.fullfilledEdgeName : QuestGraphConditionalEdgeFactory.notFullfilledEdgeName)
+            }!
+        guard let newNode = gameGraph.traverse(questNode: currentNode, action: edge.weight)
+        else
+        {
+            throw GameStateMachineError.noNodeFound(message: "No node found from node \(currentNode.name) by action \(edge.weight.name).")
+        }
+        
+        return newNode
+    }
+    
 	private func actionToEdge(mediaAction: MediaActions, node: QuestGraphNodeSG, graph: QuestGraphSG) throws -> QuestGraphActionEdgeSG
 	{
 		guard let edges = graph.edgesForVertex(node)
