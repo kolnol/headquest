@@ -38,7 +38,14 @@ public class SpeechCacher: LoggingComponent
 					let textToAudioFileGenerator = TextToAudioFileGenerator()
 					
 					self.logger.log(level: .debug, "Converting \(node.name) in to file name \(fileName)")
-					await textToAudioFileGenerator.generateAudio(description, outputFilePath: fileName)
+                    
+                    if let dialogueNode = node as? QuestDialogueNode {
+                        await textToAudioFileGenerator.generateAudio(description, outputFilePath: fileName, voiceIdentifier: SpeechIdentifiers.getVoiceIdForName(name: dialogueNode.npc))
+                    }
+                    else{
+                        await textToAudioFileGenerator.generateAudio(description, outputFilePath: fileName, voiceIdentifier: SpeechIdentifiers.getVoiceIdForName(name: "Narrator"))
+                    }
+                    
 					self.logger.log(level: .debug, "Done converting \(node.name) in to file name \(fileName)")
 				}
 			}

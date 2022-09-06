@@ -58,7 +58,18 @@ struct ContentView: View
 					.font(.system(.title, design: .rounded))
 			}
 			.padding()
-
+            
+            Button
+            {
+                Task{
+                    await cacheAudio(force: true)}
+            } label: {
+                Text("Recache audio... (you can save your time by giving me money for voice actors, seriously)")
+                    .fontWeight(.bold)
+                    .font(.system(.title, design: .rounded))
+            }
+            .padding()
+            
 			ProgressView("Caching audio data... Please give me money for voice actors!")
 				.font(.body)
 				.hidden(showCachingProgressView == false)
@@ -71,7 +82,7 @@ struct ContentView: View
 
 		}.task
 		{
-			await cacheAudio()
+            await cacheAudio(force:false)
 		}.onAppear(perform: OnAppear)
 	}
 
@@ -107,14 +118,14 @@ struct ContentView: View
 		startButtonEnabled = true
 	}
 
-	private func cacheAudio() async
+    private func cacheAudio(force: Bool) async
 	{
 		startButtonEnabled = false
 		showCachingProgressView = true
 		let totalNodesToConvert = Double(gameGraph.vertices.count)
 		var converted = 0.0
 		let audioCacher = SpeechCacher()
-		await audioCacher.cacheGraphSpeechSynthesizedAudio(gameGraph: gameGraph, onEachConverted: {
+        await audioCacher.cacheGraphSpeechSynthesizedAudio(gameGraph: gameGraph, overrideExisting:force, onEachConverted: {
 			converted += 1
 			progress = converted / totalNodesToConvert
 		})

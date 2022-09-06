@@ -49,6 +49,7 @@
 		68C757AD2829B85200B76F9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C757AC2829B85200B76F9E /* Preview Assets.xcassets */; };
 		68C757C12829B85300B76F9E /* HeadQuestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757C02829B85300B76F9E /* HeadQuestUITests.swift */; };
 		68C757C32829B85300B76F9E /* HeadQuestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757C22829B85300B76F9E /* HeadQuestUITestsLaunchTests.swift */; };
+		68CA8E9128C7D09A007EA788 /* SpeechIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CA8E9028C7D09A007EA788 /* SpeechIdentifiers.swift */; };
 		68D0AD9828B6585C0042D5B5 /* NodeWhichSetsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D0AD9728B6585C0042D5B5 /* NodeWhichSetsState.swift */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		68C757BC2829B85300B76F9E /* HeadQuestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeadQuestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C757C02829B85300B76F9E /* HeadQuestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestUITests.swift; sourceTree = "<group>"; };
 		68C757C22829B85300B76F9E /* HeadQuestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		68CA8E9028C7D09A007EA788 /* SpeechIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechIdentifiers.swift; sourceTree = "<group>"; };
 		68D0AD9728B6585C0042D5B5 /* NodeWhichSetsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeWhichSetsState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +210,7 @@
 				68A1C0582895C9BC00444549 /* GameAudioPlayer.swift */,
 				684CB13328A6E9990016416D /* SpeechCacher.swift */,
 				68A25B992883038100884BB1 /* SpeechSynthesizer.swift */,
+				68CA8E9028C7D09A007EA788 /* SpeechIdentifiers.swift */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68CA8E9128C7D09A007EA788 /* SpeechIdentifiers.swift in Sources */,
 				68A0279C28B1627300D095AC /* GraphFixtureValidator.swift in Sources */,
 				68A25B912882FBF300884BB1 /* QuestGraphActionEdgeSG.swift in Sources */,
 				684CB14328AACD4D0016416D /* PlayerState.swift in Sources */,

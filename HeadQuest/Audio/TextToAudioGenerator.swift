@@ -10,23 +10,23 @@ import Foundation
 
 protocol TextToAudioFileGeneratorProtocol
 {
-	func generateAudio(_ text: String, outputFilePath: String) async
+    func generateAudio(_ text: String, outputFilePath: String, voiceIdentifier:String) async
 }
 
 class TextToAudioFileGenerator: LoggingComponent, TextToAudioFileGeneratorProtocol
 {
 	let synthesizer = AVSpeechSynthesizer()
 
-	func generateAudio(_ text: String, outputFilePath: String) async
+	func generateAudio(_ text: String, outputFilePath: String, voiceIdentifier: String) async
 	{
 		let outputFileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(outputFilePath)
-		await generateAudio(text, outputFilePathUrl: outputFileUrl)
+        await generateAudio(text, outputFilePathUrl: outputFileUrl, voiceIdentifier:voiceIdentifier)
 	}
 
-	func generateAudio(_ text: String, outputFilePathUrl: URL) async
+    func generateAudio(_ text: String, outputFilePathUrl: URL, voiceIdentifier: String) async
 	{
 		let utterance = AVSpeechUtterance(string: text)
-		utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+		utterance.voice = AVSpeechSynthesisVoice(identifier: voiceIdentifier)
 		var output: AVAudioFile?
 		await withCheckedContinuation
 		{ (continuation: CheckedContinuation<Void, Never>) in
