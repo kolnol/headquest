@@ -43,6 +43,8 @@
 		68A25B972882FC8300884BB1 /* SwiftGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 68A25B962882FC8300884BB1 /* SwiftGraph */; };
 		68A25B9A2883038100884BB1 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B992883038100884BB1 /* SpeechSynthesizer.swift */; };
 		68A25B9C288303B300884BB1 /* MediaButtonsRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */; };
+		68BF1B82295E664600756F73 /* Visualiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BF1B81295E664600756F73 /* Visualiser.swift */; };
+		68BF1B84295E6D3A00756F73 /* GraphVisualiserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BF1B83295E6D3A00756F73 /* GraphVisualiserTests.swift */; };
 		68C757A62829B85000B76F9E /* HeadQuestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A52829B85000B76F9E /* HeadQuestApp.swift */; };
 		68C757A82829B85000B76F9E /* DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C757A72829B85000B76F9E /* DemoView.swift */; };
 		68C757AA2829B85200B76F9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C757A92829B85200B76F9E /* Assets.xcassets */; };
@@ -109,6 +111,8 @@
 		68A25B8E2882FBF300884BB1 /* QuestGraphActionEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestGraphActionEdge.swift; sourceTree = "<group>"; };
 		68A25B992883038100884BB1 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaButtonsRegistrator.swift; sourceTree = "<group>"; };
+		68BF1B81295E664600756F73 /* Visualiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualiser.swift; sourceTree = "<group>"; };
+		68BF1B83295E6D3A00756F73 /* GraphVisualiserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphVisualiserTests.swift; sourceTree = "<group>"; };
 		68C757A22829B85000B76F9E /* HeadQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeadQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C757A52829B85000B76F9E /* HeadQuestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadQuestApp.swift; sourceTree = "<group>"; };
 		68C757A72829B85000B76F9E /* DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoView.swift; sourceTree = "<group>"; };
@@ -240,6 +244,7 @@
 		68A25B7D2882FBC200884BB1 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				68BF1B80295E661F00756F73 /* Visualisation */,
 				683E631F28B27CB700F99AA1 /* FixtureBuilders */,
 				683E631E28B27C9900F99AA1 /* Validation */,
 				68A25B7E2882FBC200884BB1 /* QuestGraphFixtures.swift */,
@@ -286,6 +291,14 @@
 				68A25B9B288303B300884BB1 /* MediaButtonsRegistrator.swift */,
 			);
 			path = InputRegistration;
+			sourceTree = "<group>";
+		};
+		68BF1B80295E661F00756F73 /* Visualisation */ = {
+			isa = PBXGroup;
+			children = (
+				68BF1B81295E664600756F73 /* Visualiser.swift */,
+			);
+			path = Visualisation;
 			sourceTree = "<group>";
 		};
 		68C757992829B85000B76F9E = {
@@ -344,6 +357,7 @@
 			children = (
 				68A0279928B01FDF00D095AC /* PlayerStateTests.swift */,
 				683E631C28B199D100F99AA1 /* GraphFixtureValidatorTests.swift */,
+				68BF1B83295E6D3A00756F73 /* GraphVisualiserTests.swift */,
 			);
 			path = HeadQuestTests;
 			sourceTree = "<group>";
@@ -522,6 +536,7 @@
 				68A25B7F2882FBC200884BB1 /* QuestGraphFixtures.swift in Sources */,
 				68A25B932882FBF300884BB1 /* QuestGraph.swift in Sources */,
 				68A25B942882FBF300884BB1 /* QuestGraphActionEdge.swift in Sources */,
+				68BF1B82295E664600756F73 /* Visualiser.swift in Sources */,
 				684CB14528AAD34C0016416D /* HealthState.swift in Sources */,
 				684CB130289DE4A30016416D /* Game.swift in Sources */,
 				684CB13428A6E9990016416D /* SpeechCacher.swift in Sources */,
@@ -536,6 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68BF1B84295E6D3A00756F73 /* GraphVisualiserTests.swift in Sources */,
 				683E631D28B199D100F99AA1 /* GraphFixtureValidatorTests.swift in Sources */,
 				68A0279A28B01FDF00D095AC /* PlayerStateTests.swift in Sources */,
 			);

@@ -122,9 +122,9 @@ class CyclicGraphWithNoEnd: QuestFixtureBase
 	{
 		var edges = [GraphEdge]()
 
-		edges.append(GraphEdge(from: "start", to: "second", weight: QuestGraphActionEdgeSG(name: "start_second")))
+        edges.append(GraphEdge(from: "start", to: "second", weight: QuestGraphActionEdgeSG(name: "start_second", action: MediaActions.NextTrack)))
 
-		edges.append(GraphEdge(from: "second", to: "start", weight: QuestGraphActionEdgeSG(name: "second_start")))
+        edges.append(GraphEdge(from: "second", to: "start", weight: QuestGraphActionEdgeSG(name: "second_start", action: MediaActions.Play)))
 
 		return edges
 	}

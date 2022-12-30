@@ -301,10 +301,15 @@ class GrpahFixtureValidator: LoggingComponent
 		return duplicatedItems
 	}
 
-	private func getGraphEdges(graph: QuestGraphSG) -> [WeightedEdge<QuestGraphActionEdgeSG>]
-	{
-		graph.edges[0]
-	}
+    private func getGraphEdges(graph: QuestGraphSG) -> [WeightedEdge<QuestGraphActionEdgeSG>]
+    {
+        var res = [WeightedEdge<QuestGraphActionEdgeSG>]()
+        for e in graph.edges {
+            res.append(contentsOf: e)
+        }
+        
+        return res
+    }
 }
 
 class GraphFixtureNodeValidator

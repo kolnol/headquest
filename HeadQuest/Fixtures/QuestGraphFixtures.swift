@@ -21,7 +21,11 @@ struct QuestGraphFixtures
 		let graphValidator = GrpahFixtureValidator(nodeValidator: nodeValidator, edgeValidator: edgeValidator)
 
 		try graphValidator.validate(graph: graph)
-		return graph
+        
+        let graphVisualiser = MermaidGraphVisualiser()
+        graphVisualiser.visualise(graph: graph)
+		
+        return graph
 	}
 
 	static func TestSkipableQuest() -> QuestGraphSG
