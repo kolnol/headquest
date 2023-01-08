@@ -76,18 +76,18 @@ class GameStateMachineImplementation
     
     // TODO make it to strategy pattern
     private func goNextConditionalNode(condNode: ConditionalNode) throws -> QuestGraphNodeSG {
-        guard let edges = gameGraph.edgesForVertex(currentNode)
+        guard let edges = gameGraph.edgesForVertex(condNode)
         else
         {
-            throw GameStateMachineError.noEdgeFound(message: "No edges found for the node \(currentNode.name)")
+            throw GameStateMachineError.noEdgeFound(message: "No edges found for the node \(condNode.name)")
         }
         let edge = edges.first { edge in
                 edge.weight.name == (condNode.evaluateCondition() ? QuestGraphConditionalEdgeFactory.fullfilledEdgeName : QuestGraphConditionalEdgeFactory.notFullfilledEdgeName)
             }!
-        guard let newNode = gameGraph.traverse(questNode: currentNode, action: edge.weight)
+        guard let newNode = gameGraph.traverse(questNode: condNode, action: edge.weight)
         else
         {
-            throw GameStateMachineError.noNodeFound(message: "No node found from node \(currentNode.name) by action \(edge.weight.name).")
+            throw GameStateMachineError.noNodeFound(message: "No node found from node \(condNode.name) by action \(edge.weight.name).")
         }
         
         return newNode
