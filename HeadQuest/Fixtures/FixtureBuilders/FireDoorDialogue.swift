@@ -41,7 +41,7 @@ class FireDoorDialogue: QuestFixtureBase
 		)
 
         let acceptingHelp = QuestGraphNodeSG(
-            name: "fireDoorComingBack",
+            name: "acceptingHelp",
             description: "You accept the help from the old man. His face became more calm and friendly.",
             isSkipable: true
         )
