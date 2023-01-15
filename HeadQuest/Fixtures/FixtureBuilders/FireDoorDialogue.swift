@@ -137,7 +137,7 @@ class FireDoorDialogue: QuestFixtureBase
         )
         
         let askingForInformation = NodeWhichUpdatesState(
-            name: "askingForInformation",
+            name: "askingForInformation1",
             description: "Ask Who is the old man?" + FireDoorDialogue.createButtonsSuggestion(onPrevAction: "Check previous question", onPlayAction: "Ask current question", onNextAction: "Check next questions"),
             backgroundMusicFile: "old_man_campfire_background",
             isSkipable: false,
@@ -210,7 +210,7 @@ class FireDoorDialogue: QuestFixtureBase
             name: "thankingAndComingBack",
             description: "You thank the old man for help, standing up.",
             backgroundMusicFile: "old_man_campfire_background",
-            isSkipable: false
+            isSkipable: true
         )
 
         let itIsAPleasureOldMan = QuestDialogueNode(
@@ -329,7 +329,7 @@ class FireDoorDialogue: QuestFixtureBase
         
         edges.append(GraphEdge(from: "askingForInformation4", to: "decideIfToDrinkTea", weight: QuestGraphActionEdgeSG(name: "play", action: MediaActions.Play)))
         
-        edges.append(GraphEdge(from: "askingForInformation5", to: "thankingAndComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack", action: MediaActions.NextTrack)))
+        edges.append(GraphEdge(from: "askingForInformation5", to: "thankingAndComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack", action: MediaActions.Play)))
         edges.append(GraphEdge(from: "thankingAndComingBack", to: "itIsAPleasureOldMan", weight: QuestGraphActionEdgeSG(name: "saidThanksAndComingBack", action: MediaActions.Play)))
         edges.append(GraphEdge(from: "itIsAPleasureOldMan", to: "fireDoorComingBack", weight: QuestGraphActionEdgeSG(name: "comeBack", action: MediaActions.Play)))
         
