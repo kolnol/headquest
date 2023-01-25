@@ -22,7 +22,7 @@ struct ContentView: View
 	{
 		do
 		{
-			try gameGraph = QuestGraphFixtures.SimpleQuest()
+			try gameGraph = QuestGraphFixtures.TestConditionalNodes()
 		}
 		catch
 		{

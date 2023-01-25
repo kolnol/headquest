@@ -33,8 +33,9 @@ class GameStateMachineImplementation
 		{
 			throw GameStateMachineError.noNodeFound(message: "No node found from node \(currentNode.name) by action \(mediaAction).")
 		}
-
+    
 		currentNode = newNode
+        
 		return currentNode
 	}
 
@@ -50,6 +51,10 @@ class GameStateMachineImplementation
             let newNode = try goNextConditionalNode(condNode: condNode)
             currentNode = newNode
             return newNode
+        }
+        
+        if let stateUpdate = currentNode as? NodeWhichUpdatesState {
+            stateUpdate.updateState()
         }
         
 		guard let edges = gameGraph.edgesForVertex(currentNode)

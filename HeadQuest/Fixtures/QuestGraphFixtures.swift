@@ -22,8 +22,8 @@ struct QuestGraphFixtures
 
 		try graphValidator.validate(graph: graph)
         
-        let graphVisualiser = MermaidGraphVisualiser()
-        graphVisualiser.visualise(graph: graph)
+//        let graphVisualiser = MermaidGraphVisualiser()
+//        graphVisualiser.visualise(graph: graph)
 		
         return graph
 	}
@@ -63,4 +63,50 @@ struct QuestGraphFixtures
 
 		return questGraph
 	}
+    
+    static func TestConditionalNodes() -> QuestGraphSG
+    {
+        let startingNode = QuestGraphNodeSG(
+            name: "Start",
+            description: "This is a start",
+            isStart: true, isSkipable: true
+        )
+        
+        let conditionalNode = ConditionalNode(name: "HasTalkedToOldMan", gameStatePropertyToCheck: GameStateConstants.hasTalkedToOldMan, expectedValue: true.description)
+
+        let noNode = QuestGraphNodeSG(
+            name: "NoNode",
+            description: "This is no node",
+            isSkipable: true
+        )
+
+        let yesNode = QuestGraphNodeSG(
+            name: "YesNode",
+            description: "This is Yes Node",
+            isEnd: true
+        )
+        
+        let changeStateNode = NodeWhichUpdatesState(name: "UpdateStateNode", description: "Update state", gameStatePropertyToUpdate: GameStateConstants.hasTalkedToOldMan, updatedValue: true.description)
+        
+        let questGraph = QuestGraphSG(vertices:
+            [
+                startingNode,
+                conditionalNode,
+                noNode,
+                yesNode,
+                changeStateNode
+            ])
+
+        questGraph.addEdge(from: startingNode, to: conditionalNode, weight: QuestGraphActionEdgeSG(name: "Skip action", action: MediaActions.Play), directed: true)
+        
+        questGraph.addEdge(from: conditionalNode, to: noNode, weight: QuestGraphConditionalEdgeFactory.createConditionalNode(edgeType: ConditionalEdgeTypes.notFullfilledConditionEdge), directed: true)
+        
+        questGraph.addEdge(from: noNode, to: changeStateNode, weight: QuestGraphActionEdgeSG(name: "Update state", action: MediaActions.Play), directed: true)
+        
+        questGraph.addEdge(from: changeStateNode, to: conditionalNode, weight: QuestGraphActionEdgeSG(name: "loop until true", action: MediaActions.Play), directed: true)
+        
+        questGraph.addEdge(from: conditionalNode, to: yesNode, weight: QuestGraphConditionalEdgeFactory.createConditionalNode(edgeType: ConditionalEdgeTypes.fullfilledConditionEdge), directed: true)
+
+        return questGraph
+    }
 }

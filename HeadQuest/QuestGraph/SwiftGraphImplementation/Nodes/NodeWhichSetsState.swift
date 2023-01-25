@@ -17,7 +17,7 @@ public class NodeWhichUpdatesState: QuestGraphNodeSG {
         case updatedValue
     }
 
-    init(name: String, description: String?, isEnd: Bool = false, backgroundMusicFile: String? = nil, preVoiceSound: String? = nil, postVoiceSound: String? = nil, isSkipable: Bool = false, gameStatePropertyToUpdate: GameStateConstants, updatedValue: String)
+    init(name: String, description: String?, isEnd: Bool = false, backgroundMusicFile: String? = nil, preVoiceSound: String? = nil, postVoiceSound: String? = nil, isSkipable: Bool = true, gameStatePropertyToUpdate: GameStateConstants, updatedValue: String)
     {
         self.gameStatePropertyToUpdate = gameStatePropertyToUpdate
         self.updatedValue = updatedValue
